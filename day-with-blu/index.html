@@ -234,16 +234,20 @@ button, input { font: inherit; }
 .facts { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 20px; padding-top: 28px; border-top: 1px solid var(--line); }
 .fact b { display: block; white-space: nowrap; font: 400 30px/1 Unbounded, sans-serif; letter-spacing: -.04em; color: var(--teal-text); font-variant-numeric: tabular-nums; }
 .fact span { display: block; margin-top: 8px; font: 400 15px/1.4 "Hanken Grotesk", sans-serif; color: var(--slate); }
-.inside { margin-top: 44px; }
-.inside img { width: 100%; height: auto; }
-.inside figcaption { margin-top: 10px; font: 400 14px/1.4 "Hanken Grotesk", sans-serif; color: var(--grey-soft); }
-.inside figcaption strong { font-weight: 600; color: var(--slate); }
 
-/* ---------- 5. On your phone and watch ---------- */
-.glance { padding: 8px 24px 64px; }
-.glance img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; border-radius: var(--r-media); margin-bottom: 22px; }
+/* ---------- 5. Technical craft (older design) ---------- */
+.craft { position: relative; height: 400px; overflow: hidden; }
+.craft .bg { position: absolute; left: 50%; top: 210px; width: 390px; margin: -70px 0 0 -195px; height: 140px; object-fit: contain; will-change: transform, opacity; }
+.craft h2 { position: absolute; top: 64px; left: 28px; right: 28px; }
+.craft .sub { position: absolute; top: 300px; left: 28px; right: 28px; }
 
-/* ---------- 6. Waitlist ---------- */
+/* ---------- 6. Features (older design): vertical stack ---------- */
+.features { padding: 0 20px 72px; display: grid; gap: 44px; }
+.feature img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; border-radius: var(--r-media); }
+.feature h3 { margin-top: 20px; }
+.feature .body { margin-top: 8px; }
+
+/* ---------- 7. Waitlist ---------- */
 .waitlist { background: var(--card); padding: 56px 24px 52px; scroll-margin-top: 20px; }
 .waitlist .head { display: grid; grid-template-columns: 1fr 84px; gap: 16px; align-items: center; }
 .waitlist .head img { width: 84px; height: auto; }
@@ -384,20 +388,26 @@ button, input { font: inherit; }
       <p class="fact"><b>24/7</b><span>Sweat-proof, so it keeps tracking through workouts.</span></p>
       <p class="fact"><b>ETO</b><span>sterilised and sealed, so every pack reaches you sterile.</span></p>
     </div>
-    <figure class="inside">
-      <img src="images/web/14-product-sensor-internals.webp" alt="The BLU sensor with its cover removed, showing the circuit board inside" loading="lazy">
-      <figcaption><strong>What's inside.</strong> The electronics that take a reading every 5 minutes.</figcaption>
-    </figure>
   </section>
 
-  <!-- 5. ON YOUR PHONE AND WATCH -->
-  <section class="glance" aria-labelledby="glance-title">
-    <img src="images/web/19-tech-dataglance-phone-watch-widgets.webp" alt="BLU glucose widgets on an iPhone and an Apple Watch" loading="lazy">
-    <h2 class="h-display" id="glance-title">On your phone and watch</h2>
-    <p class="body lede">dataGlance™ widgets show your glucose on your home screen and watch face, without opening the app.</p>
+  <!-- 5. TECHNICAL CRAFT (older design) -->
+  <section class="craft">
+    <img class="bg" src="images/web/14-product-sensor-internals.webp" alt="" data-scroll-fx="craft" loading="lazy">
+    <h2 class="h-display">The technical craft</h2>
+    <p class="body sub">What goes into every BLU sensor, and why it matters.</p>
   </section>
 
-  <!-- 6. WAITLIST -->
+  <!-- 6. FEATURES (older design) -->
+  <section class="features" aria-label="Sensor features">
+    <!-- TODO: confirm the ingress rating with the product team. The old copy said "IP5X water proofing", but IP5X is a dust rating with no water rating. -->
+    <article class="feature"><img src="images/web/15-tech-sweat-proof-sensor-on-arm.webp" alt="Close-up of the BLU sensor on an arm beside a pool" loading="lazy"><h3 class="h-sub">Sweat-proof</h3><p class="body">Keeps tracking through workouts, without a pause.</p></article>
+    <article class="feature"><img src="images/web/16-tech-long-lasting-man-on-stairs.webp" alt="Man climbing outdoor stairs, wearing the BLU sensor" loading="lazy"><h3 class="h-sub">15 days per sensor</h3><p class="body">Swap it twice a month. The app reminds you to reorder before you run out.</p></article>
+    <article class="feature"><img src="images/web/17-tech-comfort-feet-in-hammock.webp" alt="Bare feet resting in a soft fabric hammock" loading="lazy"><h3 class="h-sub">Comfortable all day</h3><p class="body">A soft, non-woven polyester patch and a skin-friendly adhesive keep BLU comfortable day and night.</p></article>
+    <article class="feature"><img src="images/web/18-tech-hygiene-abstract.webp" alt="Abstract pattern of colourful light" loading="lazy"><h3 class="h-sub">Sterile every time</h3><p class="body">Every BLU pack is ETO-sterilised and sealed, so it reaches you sterile.</p></article>
+    <article class="feature"><img src="images/web/19-tech-dataglance-phone-watch-widgets.webp" alt="BLU glucose widgets on an iPhone and an Apple Watch" loading="lazy"><h3 class="h-sub">dataGlance™ widgets</h3><p class="body">See your glucose on your phone and watch home screens, without opening the app.</p></article>
+  </section>
+
+  <!-- 7. WAITLIST -->
   <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
     <div class="head">
       <h2 class="h-display" id="waitlist-title">Be among the first to try BLU</h2>
@@ -520,6 +530,19 @@ button, input { font: inherit; }
     requestAnimationFrame(tick);
   };
   tick();
+
+  /* --- Technical craft (older design): internals zoom from 4.2x to 0.8x as the section scrolls in --- */
+  const craftBg = document.querySelector('[data-scroll-fx="craft"]');
+  let craftP = 0;
+  const craftTick = () => {
+    const r = craftBg.getBoundingClientRect();
+    const target = clamp((innerHeight - r.top) / (innerHeight * .65), 0, 1);
+    craftP = reduce ? target : lerp(craftP, target, .12);
+    craftBg.style.transform = `scale(${lerp(4.2, .8, craftP)})`;
+    craftBg.style.opacity = lerp(.5, 1, craftP);
+    requestAnimationFrame(craftTick);
+  };
+  craftTick();
 
   /* --- Join buttons: scroll to the form and focus the email field --- */
   const email = document.getElementById('email');
