@@ -22,7 +22,7 @@
      The BLU logo stays an image until the brand fonts are supplied. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Montserrat:wght@400;600;700&family=Unbounded:wght@400;600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ---------- Tokens (Cerulean palette) ---------- */
+/* ---------- Tokens (Cerulean palette, Glass treatment) ---------- */
 :root {
   --teal: #0EA5E9;          /* Cerulean accent - dots, glow, highlights */
   --teal-text: #0369A1;     /* headings on light backgrounds */
@@ -87,7 +87,8 @@ button, input { font: inherit; }
 }
 .glow-btn .glow { filter: blur(15px); }
 .glow-btn .stroke { --gw: 20.7%; animation-name: orbit-stroke; }
-.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
+/* Glass: translucent Cerulean fill with a blur */
+.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, color-mix(in srgb, var(--teal-deep) 78%, transparent) 0%, color-mix(in srgb, var(--teal) 62%, transparent) 100%); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .glow-btn:hover .glow, .glow-btn:hover .stroke { transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
 .glow-btn:hover .glow   { --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; animation: none; }
 .glow-btn:hover .stroke { --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; animation: none; }
@@ -96,7 +97,9 @@ button, input { font: inherit; }
 .shine-btn {
   position: relative; display: flex; align-items: center; justify-content: center; width: 100%;
   height: 44px; border: 0; border-radius: 23px; overflow: hidden; cursor: pointer;
-  background: radial-gradient(50% 100% at 51.4% 54%, var(--teal-deep) 0%, var(--teal-mid) 100%);
+  /* Glass: translucent Cerulean with a blur and a light inner edge */
+  background: radial-gradient(50% 100% at 51.4% 54%, color-mix(in srgb, var(--teal-deep) 78%, transparent) 0%, color-mix(in srgb, var(--teal-mid) 62%, transparent) 100%);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
   font: 500 18px/1.2 Inter, sans-serif; color: #fff; isolation: isolate;
   transition: transform .15s var(--ease), filter .2s var(--ease);
 }
@@ -143,7 +146,7 @@ button, input { font: inherit; }
 .nav-pill {
   display: flex; align-items: center; justify-content: space-between;
   height: 68px; padding: 9px 8px 9px 24px; border-radius: 33px;
-  background: color-mix(in srgb, var(--teal) 16%, transparent);
+  background: color-mix(in srgb, var(--teal) 22%, transparent); box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); /* glass */
   backdrop-filter: blur(23px); -webkit-backdrop-filter: blur(23px);
 }
 .logo { display: block; height: 26px; }
@@ -152,7 +155,7 @@ button, input { font: inherit; }
 /* ---------- 1. Home (Coming Soon) ---------- */
 .home { position: relative; height: 796px; color: #fff; overflow: hidden; }
 .home > img { position: absolute; inset: 0; width: 100%; height: 804px; object-fit: cover; object-position: 50% 0%; }
-.home .grey-blur { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(153,238,255,0) 0%, rgb(171,171,171) 100%); }
+.home .grey-blur { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, color-mix(in srgb, var(--teal) 25%, #ABABAB) 100%); }
 .home .name { position: absolute; top: 44px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
 .home .intro { font: 400 15px/1.2 Montserrat, sans-serif; letter-spacing: .08em; color: var(--teal-deep); }
 .home .wordmark { margin-top: 14px; }
@@ -200,7 +203,7 @@ button, input { font: inherit; }
 .illustrative { margin: -20px 0 0 46px; font: 400 13px/1.3 "Hanken Grotesk", sans-serif; color: var(--grey-soft); }
 
 /* ---------- 3. Make a statement: swipe strip ---------- */
-.statement { background: var(--ink); padding: 56px 0 44px; }
+.statement { background: color-mix(in srgb, var(--ink) 88%, transparent); padding: 56px 0 44px; } /* glass */
 .statement h2 { font: 600 26px/1.15 Unbounded, sans-serif; letter-spacing: -.03em; color: #fff; padding: 0 24px 24px; }
 .strip { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 24px; padding: 0 24px 4px; scrollbar-width: none; overscroll-behavior-x: contain; }
 .strip::-webkit-scrollbar { display: none; }
@@ -305,7 +308,7 @@ button, input { font: inherit; }
     <div class="grey-blur"></div>
     <div class="name">
       <p class="intro">INTRODUCING</p>
-      <h1 class="wordmark"><img src="brand/palettes/lockup-cerulean.png" alt="BLU by TITAN"></h1>
+      <h1 class="wordmark"><img src="brand/palettes/lockup-cerulean-a80.png" alt="BLU by TITAN"></h1>
     </div>
     <h2 class="building fx" data-start=".8">we are building something awesome</h2>
     <h2 class="crafted fx" data-start=".8">Crafted to enhance your metabolic health</h2>
@@ -433,7 +436,7 @@ button, input { font: inherit; }
   </section>
 
   <footer class="foot">
-    <img src="brand/palettes/lockup-cerulean.png" alt="BLU by TITAN">
+    <img src="brand/palettes/lockup-cerulean-a80.png" alt="BLU by TITAN">
     <p>Images are for representation. Actual product may vary.</p>
   </footer>
 </main>
