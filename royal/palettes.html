@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLU Palettes</title>
+<link rel="icon" type="image/png" href="brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #ECEEF0; color: #1b2023; font-family: Outfit, system-ui, sans-serif; }
+header { max-width: 1760px; margin: 0 auto; padding: 28px 24px 0; }
+h1 { font-size: 22px; font-weight: 600; }
+header p { margin-top: 6px; max-width: 760px; color: #4c5357; font-size: 14px; line-height: 1.5; }
+.jump { position: sticky; top: 0; z-index: 5; margin-top: 16px; padding: 12px 24px; background: rgba(236,238,240,.92); backdrop-filter: blur(8px); }
+.jump .in { max-width: 1760px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.jump span { font-size: 13px; color: #4c5357; margin-right: 4px; }
+.jump button { height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #c9ced2; background: #fff; font: 500 13px/1 Outfit, sans-serif; cursor: pointer; }
+.jump button:hover { border-color: #8a9399; }
+.jump button:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 2px; }
+.grid { max-width: 1760px; margin: 0 auto; padding: 16px 24px 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 20px; }
+.opt h2 { font-size: 16px; font-weight: 600; }
+.opt .why { margin-top: 4px; font-size: 13px; line-height: 1.4; color: #4c5357; min-height: 36px; }
+.sw { display: flex; gap: 6px; margin: 10px 0 12px; }
+.sw div { flex: 1; }
+.sw i { display: block; height: 28px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+.sw b { display: block; margin-top: 4px; font: 500 10.5px/1.2 Outfit, sans-serif; color: #4c5357; }
+.sw code { display: block; font: 400 10.5px/1.2 ui-monospace, Consolas, monospace; color: #6b7377; }
+.frame { width: 300px; height: 608px; border-radius: 32px; overflow: hidden; background: #000; box-shadow: 0 0 0 7px #121417, 0 16px 36px rgba(0,0,0,.18); margin: 7px; }
+.frame iframe { width: 375px; height: 760px; border: 0; zoom: .8; display: block; background: #F7F7F7; }
+.aa { margin-top: 12px; font-size: 12px; color: #4c5357; line-height: 1.5; }
+.aa em { font-style: normal; font-weight: 600; color: #1b2023; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BLU by TITAN: blue palette options</h1>
+  <p>The live site in six palettes. Each phone is the real page with only the colour tokens and the logo colour swapped. Scroll inside any phone, or use the buttons to jump all of them to the same section. Contrast figures are WCAG ratios: headings on the page background, and white text on the button.</p>
+</header>
+<nav class="jump" aria-label="Jump all phones to a section"><div class="in">
+  <span>Jump all to:</span>
+  <button data-sel=".home">Hero</button>
+  <button data-sel=".info">Intro</button>
+  <button data-sel=".benefits">Benefits</button>
+  <button data-sel=".statement">Statement</button>
+  <button data-sel=".colorways">Colourways</button>
+  <button data-sel=".features">Features</button>
+  <button data-sel=".waitlist">Waitlist</button>
+</div></nav>
+<main class="grid" id="grid"></main>
+
+<script>
+const P = [
+  { id: 'teal', name: 'Teal (current)', why: 'Matches the logo you supplied. Not a blue, and the weakest contrast of the set.',
+    accent: '#01B0AB', text: '#00918C', deep: '#007A76', mid: '#00908B', ink: '#0C1F1E', aa: [3.61, 5.19] },
+  { id: 'royal', name: 'Royal', why: 'The original NIVEUX blue. Deep, confident, strongest contrast.',
+    accent: '#4474D4', text: '#0039AC', deep: '#0039AC', mid: '#3A63C4', ink: '#081430', aa: [8.99, 9.63] },
+  { id: 'cobalt', name: 'Cobalt', why: 'Brighter, more energetic blue. Reads tech and sporty.',
+    accent: '#2F6BF0', text: '#1D4ED8', deep: '#1D4ED8', mid: '#2F6BF0', ink: '#0B1430', aa: [6.26, 6.70] },
+  { id: 'cerulean', name: 'Cerulean', why: 'Sky blue with a clean, clinical feel. Common in health products.',
+    accent: '#0EA5E9', text: '#0369A1', deep: '#0369A1', mid: '#0284C7', ink: '#082032', aa: [5.54, 5.93] },
+  { id: 'ocean', name: 'Ocean', why: 'Teal-leaning blue. The smallest jump from the current logo.',
+    accent: '#0891B2', text: '#0E7490', deep: '#0E7490', mid: '#0891B2', ink: '#062A33', aa: [5.00, 5.36] },
+  { id: 'steel', name: 'Steel', why: 'Muted, low-saturation blue. Calm and premium, less "app-like".',
+    accent: '#5B8EC7', text: '#2F5D8C', deep: '#2F5D8C', mid: '#3E6FA3', ink: '#0E1A26', aa: [6.39, 6.85] },
+];
+
+const grid = document.getElementById('grid');
+const frames = [];
+P.forEach(p => {
+  const sec = document.createElement('section');
+  sec.className = 'opt';
+  sec.innerHTML = `
+    <h2>${p.name}</h2>
+    <p class="why">${p.why}</p>
+    <div class="sw">
+      ${[['Accent', p.accent], ['Headings', p.text], ['Button', p.deep], ['Dark band', p.ink]].map(([l, c]) =>
+        `<div><i style="background:${c}"></i><b>${l}</b><code>${c}</code></div>`).join('')}
+    </div>
+    <div class="frame"><iframe title="${p.name} palette preview" src="index.html"></iframe></div>
+    <p class="aa">Headings <em>${p.aa[0].toFixed(2)}:1</em> &nbsp; Button text <em>${p.aa[1].toFixed(2)}:1</em></p>`;
+  grid.append(sec);
+  const f = sec.querySelector('iframe');
+  frames.push(f);
+  f.addEventListener('load', () => {
+    const d = f.contentDocument;
+    const st = d.createElement('style');
+    st.textContent = `:root{--teal:${p.accent};--teal-text:${p.text};--teal-deep:${p.deep};--teal-mid:${p.mid};--ink:${p.ink};}`;
+    d.head.append(st);
+    d.querySelectorAll('img[src$="brand/lockup-color.png"]').forEach(i => i.src = `brand/palettes/lockup-${p.id}.png`);
+  });
+});
+
+document.querySelectorAll('.jump button').forEach(b => b.addEventListener('click', () => {
+  frames.forEach(f => {
+    const el = f.contentDocument && f.contentDocument.querySelector(b.dataset.sel);
+    // Instant jump: smooth scrolling inside off-screen iframes is throttled and stops part-way.
+    if (el) f.contentWindow.scrollTo({ top: el.getBoundingClientRect().top + f.contentWindow.scrollY, behavior: 'instant' });
+  });
+}));
+</script>
+</body>
+</html>
