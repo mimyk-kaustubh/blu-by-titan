@@ -18,8 +18,8 @@
 <link rel="preload" as="image" href="images/web/00-home-hero-woman-street-sensor.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- One UI family (Outfit). The BLU logo stays an image until the brand fonts are supplied. -->
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Original type system from main: Inter (display), Montserrat (labels), Roboto (body). The BLU logo stays an image until the brand fonts are supplied. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Montserrat:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
 /* ---------- Tokens (Cerulean palette) ---------- */
 :root {
@@ -47,54 +47,69 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--grey); font-family: Outfit, system-ui, sans-serif; overflow-x: hidden; }
+body { background: var(--bg); color: var(--grey); font-family: Roboto, system-ui, sans-serif; overflow-x: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
 
-.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 99px; background: var(--ink); color: #fff; font-weight: 500; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 99px; background: var(--ink); color: #fff; font: 500 14px/1 Inter, sans-serif; }
 .skip:focus { top: 12px; }
 
 .site { max-width: var(--col); margin: 0 auto; background: var(--bg); overflow: hidden; position: relative; }
 
-/* ---------- Type ---------- */
-.h-display { font: 600 30px/1.15 Outfit, sans-serif; letter-spacing: -.02em; color: var(--teal-text); text-wrap: balance; }
-.h-sub     { font: 600 22px/1.2 Outfit, sans-serif; letter-spacing: -.01em; color: var(--teal-text); text-wrap: balance; }
-.body      { font: 400 16px/1.5 Outfit, sans-serif; color: var(--grey); max-width: 65ch; text-wrap: pretty; }
+/* ---------- Type (main's presets) ---------- */
+.h-display { font: 600 32px/1.2 Inter, sans-serif; color: var(--teal-text); }
+.h-sub     { font: 600 24px/1.2 Montserrat, sans-serif; color: var(--teal-text); text-transform: uppercase; }
+.body      { font: 400 16px/1.2 Roboto, sans-serif; color: var(--grey); }
 
-/* ---------- Buttons ---------- */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  height: 48px; padding: 0 24px; border: 0; border-radius: 999px; cursor: pointer;
-  background: radial-gradient(60% 140% at 50% 50%, var(--teal-deep) 0%, var(--teal-mid) 100%);
-  color: #fff; font: 500 16px/1 Outfit, sans-serif; white-space: nowrap;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 6px 16px -8px color-mix(in srgb, var(--teal-deep) 60%, transparent);
-  transition: transform .15s var(--ease), filter .2s var(--ease), box-shadow .2s var(--ease);
-}
-.btn:hover { filter: brightness(1.08); }
-.btn:active { transform: scale(.98); }
-.btn[disabled] { cursor: progress; filter: saturate(.6) brightness(.95); }
-
-/* Glow button: hero CTA only (the one perpetual loop besides the slideshow). */
+/* ---------- Glow button (main's "Join NAV" component) ----------
+   Fill = brand radial; Stroke = white radial visible through a 2px gap;
+   Glow = blurred white radial. Light orbits Top > Right > Bottom > Left. */
 .glow-btn {
   position: relative; display: inline-flex; align-items: center; justify-content: center;
-  height: 52px; padding: 0 28px; border-radius: 999px; background: rgba(255,255,255,.05);
-  font: 500 17px/1 Outfit, sans-serif; color: #fff; white-space: nowrap; cursor: pointer; isolation: isolate;
-  transition: transform .15s var(--ease);
+  padding: 14px 28px; border-radius: 118px; background: rgba(255,255,255,.05);
+  font: 500 16px/1.2 Inter, sans-serif; color: #fff; white-space: nowrap; cursor: pointer;
+  isolation: isolate; transition: transform .15s var(--ease);
 }
 .glow-btn:active { transform: scale(.98); }
-.glow-btn .glow, .glow-btn .stroke, .glow-btn .fill { position: absolute; border-radius: 999px; z-index: -1; }
+.glow-btn .glow, .glow-btn .stroke, .glow-btn .fill { position: absolute; border-radius: 72px; z-index: -1; }
 .glow-btn .glow, .glow-btn .stroke {
   inset: 0;
   background: radial-gradient(var(--gw) var(--gh) at var(--gx) var(--gy), #fff 0%, rgba(255,255,255,0) 100%);
   animation: orbit 2.8s linear infinite;
 }
 .glow-btn .glow { filter: blur(15px); }
-.glow-btn .stroke { animation-name: orbit-stroke; }
-.glow-btn .fill { inset: 2px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
-.glow-btn:hover .glow   { animation: none; --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
-.glow-btn:hover .stroke { animation: none; --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
+.glow-btn .stroke { --gw: 20.7%; animation-name: orbit-stroke; }
+.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
+.glow-btn:hover .glow, .glow-btn:hover .stroke { transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
+.glow-btn:hover .glow   { --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; animation: none; }
+.glow-btn:hover .stroke { --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; animation: none; }
+
+/* ---------- Shine button (main's full-width "Join Waitlist" CTA) ---------- */
+.shine-btn {
+  position: relative; display: flex; align-items: center; justify-content: center; width: 100%;
+  height: 44px; border: 0; border-radius: 23px; overflow: hidden; cursor: pointer;
+  background: radial-gradient(50% 100% at 51.4% 54%, var(--teal-deep) 0%, color-mix(in srgb, var(--teal-deep) 72%, transparent) 100%);
+  font: 500 18px/1.2 Inter, sans-serif; color: #fff; isolation: isolate;
+  transition: transform .15s var(--ease), filter .2s var(--ease);
+}
+.shine-btn:hover { filter: brightness(1.08); }
+.shine-btn:active { transform: scale(.98); }
+.shine-btn[disabled] { cursor: progress; filter: saturate(.6) brightness(.95); }
+.shine-btn::before { /* inner highlight */
+  content: ""; position: absolute; inset: 0 3px; border-radius: 96px; z-index: -1;
+  background: radial-gradient(95% 598.5% at 53.4% 54.1%, color-mix(in srgb, var(--teal) 70%, white) 0%, color-mix(in srgb, var(--teal) 0%, transparent) 100%);
+}
+.shine-btn .shine {
+  position: absolute; width: 28px; height: 2px;
+  background: linear-gradient(90deg, rgba(181,181,181,0) 0%, color-mix(in srgb, var(--teal) 25%, white) 53%, rgba(255,255,255,0) 100%);
+}
+.shine-btn .shine.top    { top: 0;    left: 23px;  animation: shine-r 3.3s var(--ease) infinite; }
+.shine-btn .shine.bottom { bottom: 0; right: 23px; animation: shine-l 3.3s var(--ease) infinite; }
+/* 1.3s travel, then 2s pause (Framer loop: repeatDelay 2) */
+@keyframes shine-r { 0% { transform: translateX(0); opacity: 1; } 39.4% { transform: translateX(60px); opacity: 0; } 100% { transform: translateX(60px); opacity: 0; } }
+@keyframes shine-l { 0% { transform: translateX(0); opacity: 1; } 39.4% { transform: translateX(-60px); opacity: 0; } 100% { transform: translateX(-60px); opacity: 0; } }
 @keyframes orbit {
   0%, 100% { --gx: 50%;  --gy: 0%;   --gw: 25%; --gh: 50%; }
   25%      { --gx: 100%; --gy: 50%;  --gw: 25%; --gh: 35.4%; }
@@ -108,53 +123,60 @@ button, input { font: inherit; }
   75%      { --gx: 0%;   --gy: 50%;  --gw: 16.6%; --gh: 43.1%; }
 }
 
-/* ---------- Nav: appears once the hero has scrolled away ---------- */
+/* ---------- Nav (main): drops in past the home section, hides on scroll down, returns on scroll up ---------- */
 .nav {
   position: fixed; top: 0; left: 50%; z-index: 50;
-  width: 100%; max-width: var(--col); padding: 10px 12px 0;
-  transform: translate(-50%, -120%); opacity: 0; pointer-events: none;
-  transition: transform .4s var(--ease), opacity .3s var(--ease);
+  width: 100%; max-width: var(--col);
+  padding: 12px 12px 20px 20px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--teal) 10%, rgba(247,247,247,.72)) 0%, rgba(171,171,171,0) 85%);
+  transform: translate(-50%, -150px); opacity: 0;
+  transition: transform .4s var(--ease), opacity .4s var(--ease);
+  pointer-events: none;
 }
-.nav.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; transition: transform .45s var(--spring), opacity .3s var(--ease); }
+.nav.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; transition: transform .4s var(--spring), opacity .3s var(--ease); }
 .nav-pill {
   display: flex; align-items: center; justify-content: space-between;
-  height: 64px; padding: 8px 8px 8px 22px; border-radius: 999px;
-  background: color-mix(in srgb, var(--ink) 62%, transparent);
-  backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.12), 0 10px 30px -12px color-mix(in srgb, var(--ink) 45%, transparent);
+  height: 68px; padding: 9px 8px 9px 24px; border-radius: 33px;
+  background: color-mix(in srgb, var(--teal) 16%, transparent);
+  backdrop-filter: blur(23px); -webkit-backdrop-filter: blur(23px);
 }
-.logo { display: block; height: 24px; }
-.logo img { height: 100%; width: auto; }
-.nav .btn { height: 46px; }
+.logo { display: block; height: 26px; }
+.logo img { height: 100%; width: auto; filter: drop-shadow(0 1px 6px color-mix(in srgb, var(--ink) 35%, transparent)); }
 
-/* ---------- 1. Home ---------- */
-.home {
-  position: relative; isolation: isolate; min-height: 100vh; min-height: 100dvh; color: #fff; overflow: hidden;
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: max(40px, env(safe-area-inset-top)) 24px max(28px, env(safe-area-inset-bottom));
-}
-.home > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; z-index: -2; }
-.home::after { content: ""; position: absolute; inset: 0; z-index: -1; background:
-  linear-gradient(180deg, rgba(247,247,247,.9) 0, rgba(247,247,247,.6) 150px, rgba(247,247,247,0) 230px),
-  linear-gradient(180deg, color-mix(in srgb, var(--ink) 0%, transparent) 50%, color-mix(in srgb, var(--ink) 35%, transparent) 68%, color-mix(in srgb, var(--ink) 82%, transparent) 100%); }
-.home .name { display: flex; flex-direction: column; align-items: center; }
-.home .eyebrow { font: 500 13px/1 Outfit, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-deep); }
-.home .wordmark { margin-top: 16px; }
-.home .wordmark img { width: 240px; height: auto; clip-path: inset(0 100% 0 0); animation: wipe 1s var(--spring-soft) .1s forwards; }
+/* ---------- 1. Home (Coming Soon) ---------- */
+.home { position: relative; height: 796px; color: #fff; overflow: hidden; }
+.home > img { position: absolute; inset: 0; width: 100%; height: 804px; object-fit: cover; object-position: 50% 0%; }
+.home .grey-blur { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(153,238,255,0) 0%, rgb(171,171,171) 100%); }
+.home .name { position: absolute; top: 44px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+.home .intro { font: 400 15px/1.2 Montserrat, sans-serif; letter-spacing: .08em; color: var(--teal-deep); }
+.home .wordmark { margin-top: 14px; }
+.home .wordmark img { width: 250px; height: auto; }
+/* Lockup reveal: wipes in left to right (stand-in for the per-letter flip until the brand fonts are in) */
+.home .wordmark img { clip-path: inset(0 100% 0 0); animation: wipe 1s var(--spring-soft) .1s forwards; }
 @keyframes wipe { to { clip-path: inset(0 0 0 0); } }
-.home .bottom { display: flex; flex-direction: column; gap: 22px; }
-.home .lede { font: 300 21px/1.35 Outfit, sans-serif; max-width: 30ch; text-wrap: balance; text-shadow: 0 1px 12px rgba(0,0,0,.25); }
-.home .lede strong { font-weight: 500; }
-.home .glow-btn { width: 100%; }
+.home .building {
+  position: absolute; top: 494px; right: 45px; width: 208px;
+  font: 300 18px/1.2 Inter, sans-serif; text-align: right;
+}
+.home .building::before { content: ""; position: absolute; top: 0; right: calc(100% + 10px); width: 66px; height: 1px; background: #fff; }
+.home .crafted {
+  position: absolute; top: 577px; left: 59px; width: 147px;
+  font: 300 20px/1.2 Inter, sans-serif; text-align: right; text-transform: uppercase;
+}
+.home .crafted-line { position: absolute; top: 577px; right: 11px; width: 26px; height: 1px; background: #fff; }
+.home .cta { position: absolute; top: 728px; left: 36px; right: 36px; display: flex; align-items: center; justify-content: space-between; }
+.home .soon { display: flex; align-items: center; gap: 11px; font: 300 12px/1.2 Inter, sans-serif; }
+.home .soon i { width: 20px; height: 1px; background: #fff; }
 
-/* Text effect: word-by-word flip-in */
-.fx .w { display: inline-block; opacity: .001; transform: rotateY(90deg); }
-.fx.go .w { animation: flip .5s var(--spring-soft) forwards; animation-delay: calc(var(--start, 0s) + var(--i) * .06s); }
+/* Text effect: per-character flip-in (rotateY 90 -> 0), 0.05s stagger */
+.fx .w { display: inline-block; white-space: nowrap; }
+.fx .c { display: inline-block; opacity: .001; transform: rotateY(90deg); }
+.fx.go .c { animation: flip .4s var(--spring-soft) forwards; animation-delay: calc(var(--start, 0s) + var(--i) * .05s); }
 @keyframes flip { to { opacity: 1; transform: rotateY(0); } }
 
 /* ---------- 2. Intro ---------- */
-.info { padding: 64px 28px 56px; }
-.info .body { margin-top: 16px; }
+.info { padding: 52px 32px; background: var(--bg); transform-origin: 50% 0; will-change: transform; }
+.info .body { margin-top: 14px; }
 
 /* ---------- Carousel (scroll-snap) ---------- */
 .carousel { position: relative; }
@@ -182,11 +204,11 @@ button, input { font: inherit; }
 
 /* 4. Make a statement */
 .statement { background: var(--ink); padding-bottom: 36px; }
-.statement header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 52px 24px 28px; }
-.statement h2 { font: 600 30px/1.1 Outfit, sans-serif; letter-spacing: -.02em; color: #fff; }
+.statement header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 48px 25px; }
+.statement h2 { font: 700 32px/1.2 Montserrat, sans-serif; color: #fff; }
 .pause {
   flex: none; height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer;
-  border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); color: #fff; font: 500 13px/1 Outfit, sans-serif;
+  border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); color: #fff; font: 500 13px/1 Inter, sans-serif;
   transition: background .2s var(--ease);
 }
 .pause:hover { background: rgba(255,255,255,.14); }
@@ -195,7 +217,7 @@ button, input { font: inherit; }
 .slideshow .slide { flex: 0 0 100%; }
 .slideshow .slide img { width: 100%; height: 525px; object-fit: cover; pointer-events: none; user-select: none; }
 .slideshow .slide img.bottom { object-position: center bottom; }
-.slideshow .slide p { font: 500 22px/1.2 Outfit, sans-serif; letter-spacing: .06em; color: #fff; padding: 18px 24px 0; }
+.slideshow .slide p { font: 400 24px/1.2 Montserrat, sans-serif; color: #fff; padding: 19px 25px 0; }
 
 /* 5. Colourways */
 .colorways { position: relative; padding: 72px 0 60px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
@@ -215,13 +237,13 @@ button, input { font: inherit; }
   transition: transform .4s var(--spring), background-color .4s var(--ease);
 }
 .colorways[data-v="dark"] .knob { transform: translateX(100%); background: #2E2E2E; }
-.toggle button { position: relative; border: 0; background: none; cursor: pointer; border-radius: 999px; font: 500 15px/1 Outfit, sans-serif; color: var(--grey-soft); transition: color .4s var(--ease); }
-.colorways[data-v="light"] .toggle [data-v="light"] { color: var(--ink); }
+.toggle button { position: relative; border: 0; background: none; cursor: pointer; border-radius: 999px; font: 400 16px/1.2 Roboto, sans-serif; color: rgba(0,0,0,.12); transition: color .4s var(--ease); }
+.colorways[data-v="light"] .toggle [data-v="light"] { color: #000; }
 .colorways[data-v="dark"]  .toggle [data-v="dark"]  { color: #fff; }
 
 /* 6. Technical craft */
 .craft { position: relative; height: 400px; overflow: hidden; }
-.craft .bg { position: absolute; left: 50%; top: 210px; width: 390px; margin: -70px 0 0 -195px; height: 140px; object-fit: contain; transform: scale(.8); }
+.craft .bg { position: absolute; left: 50%; top: 210px; width: 390px; margin: -70px 0 0 -195px; height: 140px; object-fit: contain; will-change: transform, opacity; }
 .craft h2 { position: absolute; top: 64px; left: 28px; right: 28px; }
 .craft .sub { position: absolute; top: 300px; left: 28px; right: 28px; }
 
@@ -235,9 +257,9 @@ button, input { font: inherit; }
 .waitlist { background: var(--card); padding: 64px 24px 56px; scroll-margin-top: 20px; }
 .waitlist .body { margin-top: 12px; }
 .waitlist .phone { height: 300px; margin: 36px 0 32px; display: grid; place-items: center; }
-.waitlist .phone img { height: 300px; width: auto; }
+.waitlist .phone img { height: 300px; width: auto; transform: scale(.5); will-change: transform; }
 .form { display: grid; gap: 8px; }
-.form label { font: 500 15px/1.2 Outfit, sans-serif; color: var(--ink); }
+.form label { font: 500 15px/1.2 Inter, sans-serif; color: var(--ink); }
 .form input {
   height: 52px; padding: 0 18px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent); background: #fff; color: var(--ink);
   font-size: 16px; transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
@@ -247,31 +269,21 @@ button, input { font: inherit; }
 .form input[aria-invalid="true"] { border-color: #B42318; }
 .form .hint { font-size: 14px; line-height: 1.4; color: var(--grey-soft); }
 .form .error { font-size: 14px; line-height: 1.4; color: #B42318; }
-.form .btn { margin-top: 8px; width: 100%; }
+.form .shine-btn { margin-top: 8px; }
 .form .status { font-size: 14px; line-height: 1.4; color: var(--grey); min-height: 1px; }
 .done { padding: 20px; border-radius: var(--r-media); background: color-mix(in srgb, var(--teal) 8%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--teal) 30%, transparent); }
-.done h3 { font: 600 20px/1.2 Outfit, sans-serif; color: var(--teal-text); }
+.done h3 { font: 600 20px/1.2 Montserrat, sans-serif; color: var(--teal-text); text-transform: uppercase; }
 .done p { margin-top: 6px; }
 
 /* Footer */
 .foot { background: var(--bg); padding: 28px 24px 36px; display: grid; justify-items: center; gap: 14px; text-align: center; }
 .foot img { width: 96px; height: auto; }
-.foot p { font: 400 12px/1.4 Outfit, sans-serif; color: var(--grey-soft); }
-
-/* ---------- Scroll-linked effects (CSS scroll timelines; static where unsupported) ---------- */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .craft .bg { animation: craft-zoom linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
-    .waitlist .phone img { animation: grow linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
-  }
-}
-@keyframes craft-zoom { from { transform: scale(4.2); opacity: .5; } to { transform: scale(.8); opacity: 1; } }
-@keyframes grow { from { transform: scale(.5); } to { transform: scale(1); } }
+.foot p { font: 300 12px/1.3 Inter, sans-serif; letter-spacing: -.03em; color: var(--teal-deep); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .fx .w { opacity: 1; transform: none; }
+  .fx .c { opacity: 1; transform: none; }
   .home .wordmark img { clip-path: none; }
 }
 </style>
@@ -282,27 +294,31 @@ button, input { font: inherit; }
 <nav class="nav" id="nav" aria-label="Main">
   <div class="nav-pill">
     <a href="#home" class="logo" aria-label="BLU by TITAN, back to top"><img src="brand/blu-mark-white.png" alt=""></a>
-    <a href="#waitlist" class="btn" data-join>Join the waitlist</a>
+    <a href="#waitlist" class="glow-btn" data-join><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join</a>
   </div>
 </nav>
 
 <main class="site" id="main">
 
-  <!-- 1. HOME -->
+  <!-- 1. HOME (Coming Soon design) -->
   <section class="home" id="home">
     <img src="images/web/00-home-hero-woman-street-sensor.webp" alt="Woman on a city street wearing the BLU sensor on her upper arm" fetchpriority="high">
+    <div class="grey-blur"></div>
     <div class="name">
-      <p class="eyebrow">Coming soon</p>
-      <h1 class="wordmark"><img src="brand/palettes/lockup-cerulean.png" alt="BLU by TITAN"></h1>
+      <p class="intro">INTRODUCING</p>
+      <h1 class="wordmark"><img src="brand/lockup-color.png" alt="BLU by TITAN"></h1>
     </div>
-    <div class="bottom">
-      <p class="lede fx" data-start=".6">A continuous glucose monitor from Titan. <strong>Your glucose every 5 minutes,</strong> on your phone.</p>
-      <a href="#waitlist" class="glow-btn" data-join><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join the waitlist</a>
+    <h2 class="building fx" data-start=".8">we are building something awesome</h2>
+    <h2 class="crafted fx" data-start=".8">Crafted to enhance your metabolic health</h2>
+    <div class="crafted-line"></div>
+    <div class="cta">
+      <p class="soon fx" data-start=".8"><span>COMING</span><i></i><span>SOON</span></p>
+      <a href="#waitlist" class="glow-btn" data-join><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
     </div>
   </section>
 
   <!-- 2. INTRO -->
-  <section class="info">
+  <section class="info" data-scroll-fx="info">
     <h2 class="h-display">Healthier choices, backed by your own glucose data</h2>
     <p class="body">BLU reads your glucose in real time, shows where it's heading and fits into your day without getting in the way.</p>
   </section>
@@ -361,7 +377,7 @@ button, input { font: inherit; }
 
   <!-- 6. TECHNICAL CRAFT -->
   <section class="craft">
-    <img class="bg" src="images/web/14-product-sensor-internals.webp" alt="" loading="lazy">
+    <img class="bg" src="images/web/14-product-sensor-internals.webp" alt="" data-scroll-fx="craft" loading="lazy">
     <h2 class="h-display">The technical craft</h2>
     <p class="body sub">What goes into every BLU sensor, and why it matters.</p>
   </section>
@@ -380,7 +396,7 @@ button, input { font: inherit; }
   <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
     <h2 class="h-display" id="waitlist-title">Be among the first to try BLU</h2>
     <p class="body">Join the waitlist and we'll email you when BLU launches.</p>
-    <div class="phone"><img src="images/web/20-waitlist-app-102-with-sensor.webp" alt="BLU app showing a glucose reading of 102 mg/dL next to the sensor" loading="lazy"></div>
+    <div class="phone"><img src="images/web/20-waitlist-app-102-with-sensor.webp" alt="BLU app showing a glucose reading of 102 mg/dL next to the sensor" data-scroll-fx="phone" loading="lazy"></div>
 
     <!-- Set data-endpoint to a form service URL (Formspree, Basin, a Google Apps Script, your API) that accepts a JSON POST of { email }. -->
     <form class="form" id="waitlist-form" data-endpoint="" novalidate>
@@ -388,7 +404,7 @@ button, input { font: inherit; }
       <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required aria-describedby="email-hint email-error">
       <p class="hint" id="email-hint">We'll only use it to tell you about the BLU launch.</p>
       <p class="error" id="email-error" hidden></p>
-      <button type="submit" class="btn">Join the waitlist</button>
+      <button type="submit" class="shine-btn"><span class="shine top"></span><span class="shine bottom"></span><span class="label">Join the waitlist</span></button>
       <p class="status" role="status" aria-live="polite"></p>
     </form>
   </section>
@@ -403,29 +419,70 @@ button, input { font: inherit; }
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* --- Hero text: split into words, flip in --- */
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  /* --- Text effect (main): split into characters, flip in on load --- */
   document.querySelectorAll('.fx').forEach(el => {
     let i = 0;
-    const split = node => [...node.childNodes].forEach(n => {
-      if (n.nodeType === 3) {
-        const frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach(part => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { frag.append(' '); return; }
-          const w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--i', i++); w.textContent = part; frag.append(w);
-        });
-        n.replaceWith(frag);
-      } else if (n.nodeType === 1) split(n);
-    });
+    const split = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(word => {
+            if (!word) return;
+            if (/^\s+$/.test(word)) { frag.append(' '); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            [...word].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.style.setProperty('--i', i++); c.textContent = ch; w.append(c); });
+            frag.append(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'I') split(n);
+      });
+    };
     split(el);
     el.style.setProperty('--start', (el.dataset.start || 0) + 's');
     requestAnimationFrame(() => el.classList.add('go'));
   });
 
-  /* --- Nav: shown once the hero is mostly out of view --- */
+  /* --- Nav (main): appears once past the home section; hides on scroll down, shows on scroll up --- */
   const nav = document.getElementById('nav');
-  new IntersectionObserver(([e]) => nav.classList.toggle('show', !e.isIntersecting), { threshold: 0, rootMargin: '-60% 0px 0px 0px' })
-    .observe(document.getElementById('home'));
+  const home = document.getElementById('home');
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY, pastHome = y > home.offsetHeight * .6;
+    if (!pastHome) nav.classList.remove('show');
+    else if (y < lastY - 2) nav.classList.add('show');
+    else if (y > lastY + 2) nav.classList.remove('show');
+    lastY = y;
+  }, { passive: true });
+
+  /* --- Scroll-linked transforms (main: Framer "onScroll" effects, spring-smoothed) --- */
+  const fx = [
+    { el: document.querySelector('[data-scroll-fx="info"]'),  from: { rx: 10 },         to: { rx: 0 } },
+    { el: document.querySelector('[data-scroll-fx="craft"]'), from: { s: 4.2, o: .5 }, to: { s: .8, o: 1 } },
+    { el: document.querySelector('[data-scroll-fx="phone"]'), from: { s: .5 },         to: { s: 1 } },
+  ].map(f => ({ ...f, p: 0 }));
+  const apply = f => {
+    const v = k => lerp(f.from[k], f.to[k], f.p);
+    const t = [];
+    if ('rx' in f.from) t.push(`rotateX(${v('rx')}deg)`);
+    if ('s' in f.from) t.push(`scale(${v('s')})`);
+    f.el.style.transform = t.join(' ');
+    if ('o' in f.from) f.el.style.opacity = v('o');
+  };
+  const tick = () => {
+    const vh = innerHeight;
+    fx.forEach(f => {
+      const r = f.el.getBoundingClientRect();
+      // 0 when the layer's top enters at the bottom of the screen, 1 when it reaches 35% from the top
+      const target = clamp((vh - r.top) / (vh * .65), 0, 1);
+      f.p = reduce ? target : lerp(f.p, target, .12);
+      apply(f);
+    });
+    requestAnimationFrame(tick);
+  };
+  tick();
 
   /* --- Join buttons: scroll to the form and focus the email field --- */
   const email = document.getElementById('email');
@@ -506,7 +563,7 @@ button, input { font: inherit; }
     showError('');
     const endpoint = form.dataset.endpoint;
     if (!endpoint) { status.textContent = "Sign-ups aren't open yet. Please check back soon."; return; }
-    submit.disabled = true; submit.textContent = 'Joining…'; form.setAttribute('aria-busy', 'true');
+    submit.disabled = true; submit.querySelector('.label').textContent = 'Joining…'; form.setAttribute('aria-busy', 'true');
     try {
       const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ email: value }) });
       if (!res.ok) throw new Error(res.status);
@@ -516,7 +573,7 @@ button, input { font: inherit; }
       form.replaceWith(done); done.focus();
     } catch {
       status.textContent = "We couldn't add you to the waitlist. Check your connection and try again.";
-      submit.disabled = false; submit.textContent = 'Join the waitlist'; form.removeAttribute('aria-busy');
+      submit.disabled = false; submit.querySelector('.label').textContent = 'Join the waitlist'; form.removeAttribute('aria-busy');
     }
   });
 })();
