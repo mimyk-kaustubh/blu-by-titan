@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLU Wireframes</title>
+<style>
+/* Low-fidelity wireframes: greys only, no brand styling. One accent marks annotations. */
+:root { --ink: #2b2f33; --mid: #8a9096; --line: #b9bfc5; --fill: #e3e6e9; --paper: #fafafa; --note: #0284C7; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #eef0f2; color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { max-width: 1240px; margin: 0 auto; padding: 28px 24px 8px; }
+h1 { font-size: 20px; font-weight: 600; }
+header p { margin-top: 6px; max-width: 820px; color: #555b61; }
+.cols { max-width: 1240px; margin: 0 auto; padding: 16px 24px 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; align-items: start; }
+.col h2 { font-size: 15px; font-weight: 600; }
+.col > p { margin: 4px 0 12px; color: #555b61; font-size: 13px; min-height: 38px; }
+
+.phone { width: 320px; background: var(--paper); border: 2px solid var(--ink); border-radius: 28px; padding: 10px 0 14px; overflow: hidden; }
+.sec { position: relative; margin: 8px 10px; padding: 12px; border: 1.5px dashed var(--line); border-radius: 10px; }
+.sec.dark { background: #4a5056; border-color: #4a5056; }
+.sec.dark .ln, .sec.dark .ttl { background: #9aa1a8; }
+.sec.locked { border-style: solid; border-color: var(--mid); }
+.tag { position: absolute; top: -9px; left: 10px; background: var(--paper); padding: 0 6px; font: 600 10.5px/16px system-ui, sans-serif; color: var(--mid); letter-spacing: .02em; }
+.sec.dark .tag { background: #eef0f2; }
+.img { background:
+  linear-gradient(to top right, transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)),
+  linear-gradient(to top left,  transparent calc(50% - 1px), var(--line) 50%, transparent calc(50% + 1px)), var(--fill);
+  border: 1.5px solid var(--line); border-radius: 6px; position: relative; }
+.img span { position: absolute; left: 6px; bottom: 4px; font-size: 10px; color: var(--mid); background: var(--fill); padding: 0 3px; }
+.ttl { height: 14px; background: var(--ink); border-radius: 3px; margin: 8px 0 6px; }
+.ln { height: 7px; background: var(--line); border-radius: 3px; margin: 5px 0; }
+.btn { display: grid; place-items: center; height: 30px; border: 2px solid var(--ink); border-radius: 999px; font-size: 11px; font-weight: 600; margin-top: 10px; }
+.input { height: 30px; border: 1.5px solid var(--mid); border-radius: 999px; margin-top: 6px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.dots { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+.dots i:first-child { background: var(--ink); }
+.pill { height: 26px; border: 1.5px solid var(--mid); border-radius: 999px; display: grid; grid-template-columns: 1fr 1fr; font-size: 10px; text-align: center; line-height: 23px; color: var(--mid); }
+.n { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--note); color: #fff; font: 700 10px/1 system-ui, sans-serif; vertical-align: middle; }
+.sec > .n { position: absolute; top: -9px; right: 10px; }
+.notes { margin-top: 12px; padding-left: 0; list-style: none; display: grid; gap: 7px; font-size: 13px; }
+.notes li { display: grid; grid-template-columns: 22px 1fr; gap: 4px; }
+svg.trace { display: block; width: 100%; height: auto; }
+.mini { font-size: 10px; color: var(--mid); }
+.spec { border: 1.5px solid var(--line); border-radius: 8px; padding: 8px; }
+.spec b { display: block; font-size: 18px; line-height: 1; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.strip { display: flex; gap: 8px; overflow: hidden; }
+.strip .img { flex: 0 0 62%; height: 150px; }
+.time { font: 600 10px/1 system-ui, sans-serif; color: var(--mid); }
+.tl { position: relative; padding-left: 26px; }
+.tl::before { content: ""; position: absolute; left: 9px; top: 4px; bottom: 4px; border-left: 2px dashed var(--note); }
+.tl .stop { position: relative; margin-bottom: 14px; }
+.tl .stop::before { content: ""; position: absolute; left: -21px; top: 2px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--note); background: var(--paper); }
+</style>
+</head>
+<body>
+<header>
+  <h1>BLU by TITAN: wireframes</h1>
+  <p>Low-fidelity structure only: greys, boxes and placeholder lines. Left is the current Cerulean page as it stands. The two right columns are alternative structures for everything below the home section, which stays locked as you asked. Numbered markers match the notes under each column, so you can refer to a change as "B3".</p>
+</header>
+
+<main class="cols">
+
+  <!-- CURRENT -->
+  <section class="col">
+    <h2>Current (Cerulean, as built)</h2>
+    <p>Eight stacked sections, mostly full-width images with text below.</p>
+    <div class="phone">
+      <div class="sec locked"><span class="tag">HOME (locked)</span>
+        <div class="ln" style="width:30%;margin:0 auto"></div>
+        <div class="ttl" style="height:34px;width:70%;margin:6px auto"></div>
+        <div class="img" style="height:170px"><span>hero photo, full bleed</span></div>
+        <div class="row" style="margin-top:6px"><div class="ln" style="width:30%"></div><div class="btn" style="flex:1;margin:0">Join Waitlist</div></div>
+      </div>
+      <div class="sec"><span class="tag">INTRO</span><span class="n">1</span>
+        <div class="ttl"></div><div class="ttl" style="width:70%"></div><div class="ln"></div><div class="ln" style="width:80%"></div>
+      </div>
+      <div class="sec"><span class="tag">BENEFITS CAROUSEL (3)</span>
+        <div class="img" style="height:150px"><span>photo + app screen</span></div>
+        <div class="ttl" style="width:60%"></div><div class="ln"></div><div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="sec dark"><span class="tag">MAKE A STATEMENT</span>
+        <div class="row"><div class="ttl" style="flex:1"></div><div class="btn" style="margin:0;width:54px;border-color:#9aa1a8;color:#cfd3d7">Pause</div></div>
+        <div class="img" style="height:150px"><span>auto slideshow</span></div><div class="ln" style="width:40%"></div>
+      </div>
+      <div class="sec"><span class="tag">COLOURWAYS</span><span class="n">2</span>
+        <div class="ttl" style="width:55%"></div><div class="img" style="height:110px;width:70%;margin:6px auto"><span>sensor</span></div><div class="pill"><span>Moonlight</span><span>Dark Night</span></div>
+      </div>
+      <div class="sec"><span class="tag">TECHNICAL CRAFT</span><span class="n">2</span>
+        <div class="ttl" style="width:60%"></div><div class="img" style="height:50px"><span>internals</span></div><div class="ln" style="width:70%"></div>
+      </div>
+      <div class="sec"><span class="tag">FEATURES x5</span><span class="n">3</span>
+        <div class="img" style="height:80px"><span>photo</span></div><div class="ttl" style="width:50%"></div><div class="ln"></div>
+        <div class="img" style="height:80px;margin-top:8px"><span>photo</span></div><div class="ttl" style="width:50%"></div><div class="ln"></div>
+        <p class="mini" style="text-align:center;margin-top:6px">+ 3 more, same pattern</p>
+      </div>
+      <div class="sec"><span class="tag">WAITLIST</span><span class="n">4</span>
+        <div class="ttl"></div><div class="ln" style="width:70%"></div><div class="img" style="height:80px;width:45%;margin:6px auto"><span>phone</span></div>
+        <div class="input"></div><div class="btn">Join the waitlist</div>
+      </div>
+      <div class="sec"><span class="tag">FOOTER</span><div class="ln" style="width:40%;margin:0 auto"></div></div>
+    </div>
+    <ul class="notes">
+      <li><span class="n">1</span><span>Text-only band on a flat background between two image-heavy sections. Nothing shows what the product actually measures.</span></li>
+      <li><span class="n">2</span><span>Colourways and Technical craft are two thin sections about the same object.</span></li>
+      <li><span class="n">3</span><span>Five identical photo cards in a row: the longest stretch of the page, with the least variety.</span></li>
+      <li><span class="n">4</span><span>The form is the page's goal, but it sits below a large phone image and nothing says what happens after signing up.</span></li>
+    </ul>
+  </section>
+
+  <!-- PROPOSAL A -->
+  <section class="col">
+    <h2>A. Refine: same order, sharper sections</h2>
+    <p>Keeps the current flow. Adds one signature element (a live glucose line) and tightens the weaker sections.</p>
+    <div class="phone">
+      <div class="sec locked"><span class="tag">HOME (locked)</span>
+        <div class="img" style="height:90px"><span>unchanged</span></div>
+      </div>
+      <div class="sec"><span class="tag">INTRO + GLUCOSE LINE</span><span class="n">1</span>
+        <div class="ttl"></div><div class="ttl" style="width:60%"></div>
+        <svg class="trace" viewBox="0 0 280 70" aria-hidden="true"><polyline fill="none" stroke="#2b2f33" stroke-width="2" points="0,45 25,44 45,40 60,22 75,18 95,30 120,40 150,42 170,36 185,20 200,24 225,38 255,40 280,39"/><g fill="#0284C7"><circle cx="75" cy="18" r="3"/><circle cx="185" cy="20" r="3"/></g><line x1="0" y1="62" x2="280" y2="62" stroke="#b9bfc5" stroke-dasharray="2 4"/></svg>
+        <div class="row" style="justify-content:space-between"><span class="mini">7:00</span><span class="mini">reading every 5 min</span><span class="mini">22:00</span></div>
+        <div class="ln" style="width:85%"></div>
+      </div>
+      <div class="sec"><span class="tag">BENEFITS CAROUSEL (3)</span><span class="n">2</span>
+        <div class="row"><div class="img" style="height:130px;flex:1"><span>photo</span></div><div class="img" style="height:150px;width:70px"><span>app</span></div></div>
+        <div class="ttl" style="width:60%"></div><div class="ln"></div><div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="sec dark"><span class="tag">MAKE A STATEMENT</span>
+        <div class="ttl" style="width:70%"></div>
+        <div class="strip"><div class="img"><span>swipe</span></div><div class="img"><span>peek</span></div></div><div class="ln" style="width:40%"></div>
+      </div>
+      <div class="sec"><span class="tag">THE SENSOR (merged)</span><span class="n">3</span>
+        <div class="ttl" style="width:50%"></div>
+        <div class="img" style="height:110px;width:70%;margin:6px auto"><span>sensor, toggles colour</span></div>
+        <div class="pill"><span>Moonlight</span><span>Dark Night</span></div>
+        <div class="img" style="height:46px;margin-top:8px"><span>internals zoom on scroll</span></div>
+      </div>
+      <div class="sec"><span class="tag">SPECS GRID</span><span class="n">4</span>
+        <div class="grid2">
+          <div class="spec"><b>15 days</b><span class="mini">per sensor</span></div>
+          <div class="spec"><b>5 min</b><span class="mini">between readings</span></div>
+          <div class="spec"><b>Sweat</b><span class="mini">proof</span></div>
+          <div class="spec"><b>ETO</b><span class="mini">sterile pack</span></div>
+        </div>
+        <div class="row" style="margin-top:8px"><div class="img" style="height:70px;flex:1"><span>widgets</span></div><div style="flex:1"><div class="ttl"></div><div class="ln"></div></div></div>
+      </div>
+      <div class="sec"><span class="tag">WAITLIST</span><span class="n">5</span>
+        <div class="ttl"></div>
+        <div class="input"></div><div class="btn">Join the waitlist</div>
+        <div class="row" style="margin-top:8px;gap:6px"><div class="spec mini" style="flex:1">Sign up</div><div class="spec mini" style="flex:1">Launch email</div><div class="spec mini" style="flex:1">First order</div></div>
+      </div>
+      <div class="sec"><span class="tag">FOOTER</span><div class="row" style="justify-content:space-between"><div class="ln" style="width:30%"></div><div class="ln" style="width:40%"></div></div></div>
+    </div>
+    <ul class="notes">
+      <li><span class="n">1</span><span>A glucose curve draws itself as you scroll, the page's one signature motion. It shows what BLU measures in one glance.</span></li>
+      <li><span class="n">2</span><span>App screen beside the photo instead of overlapping it, so both read.</span></li>
+      <li><span class="n">3</span><span>Colourways and internals merge into one "The sensor" section.</span></li>
+      <li><span class="n">4</span><span>Five tall photo cards become four quick facts plus one wide card for the widgets: about a third of the scroll.</span></li>
+      <li><span class="n">5</span><span>Form moves up and gets a three-step "what happens next" row.</span></li>
+    </ul>
+  </section>
+
+  <!-- PROPOSAL B -->
+  <section class="col">
+    <h2>B. A day with BLU: story-led</h2>
+    <p>Restructures the middle of the page as one day, morning to night, told along a single glucose line.</p>
+    <div class="phone">
+      <div class="sec locked"><span class="tag">HOME (locked)</span>
+        <div class="img" style="height:90px"><span>unchanged</span></div>
+      </div>
+      <div class="sec"><span class="tag">A DAY WITH BLU</span><span class="n">1</span>
+        <div class="ttl"></div>
+        <div class="tl">
+          <div class="stop"><span class="time">7:00 morning ride</span><div class="row"><div class="img" style="height:70px;flex:1"><span>cyclist</span></div><div class="img" style="height:80px;width:46px"><span>app</span></div></div><div class="ln" style="width:80%"></div></div>
+          <div class="stop"><span class="time">13:00 lunch</span><div class="row"><div class="img" style="height:70px;flex:1"><span>bench</span></div><div class="img" style="height:80px;width:46px"><span>app</span></div></div><div class="ln" style="width:75%"></div></div>
+          <div class="stop"><span class="time">22:00 wind down</span><div class="row"><div class="img" style="height:70px;flex:1"><span>reading</span></div><div class="img" style="height:80px;width:46px"><span>app</span></div></div><div class="ln" style="width:70%"></div></div>
+        </div>
+      </div>
+      <div class="sec dark"><span class="tag">MAKE A STATEMENT</span><span class="n">2</span>
+        <div class="ttl" style="width:70%"></div>
+        <div class="strip"><div class="img"><span>swipe</span></div><div class="img"><span>peek</span></div></div>
+      </div>
+      <div class="sec"><span class="tag">THE SENSOR</span>
+        <div class="row"><div class="img" style="height:100px;flex:1"><span>sensor</span></div><div style="flex:1"><div class="ttl"></div><div class="pill" style="margin-top:8px"><span>Moon</span><span>Dark</span></div></div></div>
+        <div class="grid2" style="margin-top:8px"><div class="spec"><b>15 days</b></div><div class="spec"><b>5 min</b></div><div class="spec"><b>Sweat</b></div><div class="spec"><b>ETO</b></div></div>
+      </div>
+      <div class="sec"><span class="tag">ON YOUR WRIST AND PHONE</span><span class="n">3</span>
+        <div class="img" style="height:90px"><span>widgets photo</span></div><div class="ln" style="width:80%"></div>
+      </div>
+      <div class="sec"><span class="tag">WAITLIST</span>
+        <div class="ttl"></div><div class="input"></div><div class="btn">Join the waitlist</div>
+        <div class="row" style="margin-top:8px;gap:6px"><div class="spec mini" style="flex:1">Sign up</div><div class="spec mini" style="flex:1">Launch email</div><div class="spec mini" style="flex:1">First order</div></div>
+      </div>
+      <div class="sec"><span class="tag">FOOTER</span><div class="row" style="justify-content:space-between"><div class="ln" style="width:30%"></div><div class="ln" style="width:40%"></div></div></div>
+    </div>
+    <ul class="notes">
+      <li><span class="n">1</span><span>The intro and the benefits carousel become one timeline. The dashed line becomes the glucose curve and draws as you scroll. The content really is a sequence (times of day), so the timeline is earned, and nothing hides behind swipes.</span></li>
+      <li><span class="n">2</span><span>Statement photos become a swipeable strip that peeks the next image, instead of an auto-advancing slideshow.</span></li>
+      <li><span class="n">3</span><span>dataGlance gets its own short moment, since it's the feature people use every day.</span></li>
+    </ul>
+  </section>
+
+</main>
+</body>
+</html>
