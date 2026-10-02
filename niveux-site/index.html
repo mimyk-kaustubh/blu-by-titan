@@ -3,27 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>BLU by TITAN</title>
-<meta name="description" content="Made with love in IISc">
+<title>BLU by TITAN | Continuous glucose monitor</title>
+<meta name="description" content="BLU by TITAN is a continuous glucose monitor that reads your glucose every 5 minutes and shows it on your phone. Join the waitlist.">
+<meta name="theme-color" content="#F7F7F7">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BLU by TITAN">
+<meta property="og:description" content="A continuous glucose monitor from Titan. Join the waitlist.">
+<meta property="og:url" content="https://mimyk-kaustubh.github.io/blu-by-titan/">
+<meta property="og:image" content="https://mimyk-kaustubh.github.io/blu-by-titan/images/00-home-hero-woman-street-sensor.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="brand/favicon-32.png">
+<link rel="icon" type="image/png" sizes="180x180" href="brand/favicon-180.png">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<link rel="preload" as="image" href="images/web/00-home-hero-woman-street-sensor.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Montserrat:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+<!-- One UI family (Outfit). The BLU logo stays an image until the brand fonts are supplied. -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ---------- Tokens (from the Framer site) ---------- */
+/* ---------- Tokens ---------- */
 :root {
-  /* BLU by TITAN brand */
-  --teal: #01B0AB;          /* logo teal (sampled) - accents, dots, glow fill end */
-  --teal-text: #009A95;     /* slightly deeper teal for headings: passes 3:1 for large text */
-  --teal-deep: #007A76;     /* button fills: white text stays readable */
-  --grey: #616363;          /* TITAN grey (sampled) - body copy */
-  --blue: var(--teal-text); /* legacy name used by headings below */
-  --blue-2: var(--teal);
-  --bg: #F7F7F7;            /* page background token */
-  --white: #FFFFFF;
-  --ease: cubic-bezier(.44, 0, .56, 1);          /* Framer default ease */
-  --spring: cubic-bezier(.34, 1.25, .64, 1);     /* ~ spring bounce .2, .4s */
-  --spring-soft: cubic-bezier(.22, 1, .36, 1);   /* ~ spring stiffness 200, damping 40 */
-  --col: 430px;             /* mobile column width on wide screens */
+  --teal: #01B0AB;          /* logo teal (sampled) - accents */
+  --teal-text: #00918C;     /* headings on light backgrounds */
+  --teal-deep: #007A76;     /* button fills: white text passes AA */
+  --grey: #4F5352;          /* body copy: TITAN grey, nudged darker for AA on #F7F7F7 */
+  --grey-soft: #616363;     /* TITAN grey (sampled) - secondary text */
+  --ink: #0C1F1E;           /* deep teal-black for the one dark band */
+  --bg: #F7F7F7;
+  --card: #FFFFFF;
+  --line: rgba(12,31,30,.12);
+  --ease: cubic-bezier(.44, 0, .56, 1);
+  --spring: cubic-bezier(.34, 1.25, .64, 1);
+  --spring-soft: cubic-bezier(.22, 1, .36, 1);
+  --col: 430px;             /* phone-width column on wide screens (desktop layout still to come) */
+  /* Shape rule: interactive controls are full pills; image containers are 16px. */
+  --r-media: 16px;
 }
 @property --gx { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
 @property --gy { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
@@ -31,44 +45,55 @@
 @property --gh { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg);
-  color: var(--blue);
-  font-family: Roboto, system-ui, sans-serif;
-  overflow-x: hidden;
-}
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--grey); font-family: Outfit, system-ui, sans-serif; overflow-x: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 99px; background: var(--ink); color: #fff; font-weight: 500; }
+.skip:focus { top: 12px; }
 
 .site { max-width: var(--col); margin: 0 auto; background: var(--bg); overflow: hidden; position: relative; }
 
-/* ---------- Type presets ---------- */
-.h-display { font: 600 32px/1.2 Inter, sans-serif; color: var(--blue); }
-.h-label   { font: 600 24px/1.2 Montserrat, sans-serif; color: var(--blue); text-transform: uppercase; }
-.body      { font: 400 16px/1.2 Roboto, sans-serif; color: var(--grey); }
+/* ---------- Type ---------- */
+.h-display { font: 600 30px/1.15 Outfit, sans-serif; letter-spacing: -.02em; color: var(--teal-text); text-wrap: balance; }
+.h-sub     { font: 600 22px/1.2 Outfit, sans-serif; letter-spacing: -.01em; color: var(--teal-text); text-wrap: balance; }
+.body      { font: 400 16px/1.5 Outfit, sans-serif; color: var(--grey); max-width: 65ch; text-wrap: pretty; }
 
-/* ---------- Glow button ("Join NAV" component) ----------
-   Fill = blue radial; Stroke = white radial visible through a 2px gap;
-   Glow = blurred white radial. Light orbits Top > Right > Bottom > Left. */
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 24px; border: 0; border-radius: 999px; cursor: pointer;
+  background: radial-gradient(60% 140% at 50% 50%, var(--teal-deep) 0%, #00908B 100%);
+  color: #fff; font: 500 16px/1 Outfit, sans-serif; white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 6px 16px -8px rgba(0,122,118,.6);
+  transition: transform .15s var(--ease), filter .2s var(--ease), box-shadow .2s var(--ease);
+}
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: scale(.98); }
+.btn[disabled] { cursor: progress; filter: saturate(.6) brightness(.95); }
+
+/* Glow button: hero CTA only (the one perpetual loop besides the slideshow). */
 .glow-btn {
   position: relative; display: inline-flex; align-items: center; justify-content: center;
-  padding: 14px 28px; border-radius: 118px; background: rgba(255,255,255,.05);
-  font: 500 16px/1.2 Inter, sans-serif; color: #fff; white-space: nowrap; cursor: pointer;
-  isolation: isolate;
+  height: 52px; padding: 0 28px; border-radius: 999px; background: rgba(255,255,255,.05);
+  font: 500 17px/1 Outfit, sans-serif; color: #fff; white-space: nowrap; cursor: pointer; isolation: isolate;
+  transition: transform .15s var(--ease);
 }
-.glow-btn .glow, .glow-btn .stroke, .glow-btn .fill { position: absolute; border-radius: 72px; z-index: -1; }
+.glow-btn:active { transform: scale(.98); }
+.glow-btn .glow, .glow-btn .stroke, .glow-btn .fill { position: absolute; border-radius: 999px; z-index: -1; }
 .glow-btn .glow, .glow-btn .stroke {
   inset: 0;
   background: radial-gradient(var(--gw) var(--gh) at var(--gx) var(--gy), #fff 0%, rgba(255,255,255,0) 100%);
   animation: orbit 2.8s linear infinite;
 }
 .glow-btn .glow { filter: blur(15px); }
-.glow-btn .stroke { --gw: 20.7%; animation-name: orbit-stroke; }
-.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
-.glow-btn:hover .glow, .glow-btn:hover .stroke { animation-play-state: paused; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
-.glow-btn:hover .glow   { --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; animation: none; }
-.glow-btn:hover .stroke { --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; animation: none; }
+.glow-btn .stroke { animation-name: orbit-stroke; }
+.glow-btn .fill { inset: 2px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
+.glow-btn:hover .glow   { animation: none; --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
+.glow-btn:hover .stroke { animation: none; --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
 @keyframes orbit {
   0%, 100% { --gx: 50%;  --gy: 0%;   --gw: 25%; --gh: 50%; }
   25%      { --gx: 100%; --gy: 50%;  --gw: 25%; --gh: 35.4%; }
@@ -82,252 +107,251 @@ a { color: inherit; text-decoration: none; }
   75%      { --gx: 0%;   --gy: 50%;  --gw: 16.6%; --gh: 43.1%; }
 }
 
-/* ---------- Shine button (full-width "Join Waitlist" CTA) ---------- */
-.shine-btn {
-  position: relative; display: flex; align-items: center; justify-content: center;
-  height: 44px; border-radius: 23px; overflow: hidden;
-  background: radial-gradient(50% 100% at 51.4% 54%, var(--teal-deep) 0%, rgba(0,122,118,.72) 100%);
-  font: 500 18px/1.2 Inter, sans-serif; color: #fff; isolation: isolate;
-}
-.shine-btn::before { /* inner highlight */
-  content: ""; position: absolute; inset: 0 3px; border-radius: 96px; z-index: -1;
-  background: radial-gradient(95% 598.5% at 53.4% 54.1%, rgb(64,200,195) 0%, rgba(1,176,171,0) 100%);
-}
-.shine-btn .shine {
-  position: absolute; width: 28px; height: 2px;
-  background: linear-gradient(90deg, rgba(181,181,181,0) 0%, rgb(190,240,237) 53%, rgba(255,255,255,0) 100%);
-}
-.shine-btn .shine.top    { top: 0;    left: 23px;  animation: shine-r 3.3s var(--ease) infinite; }
-.shine-btn .shine.bottom { bottom: 0; right: 23px; animation: shine-l 3.3s var(--ease) infinite; }
-/* 1.3s travel, then 2s pause (Framer loop: repeatDelay 2) */
-@keyframes shine-r { 0% { transform: translateX(0); opacity: 1; } 39.4% { transform: translateX(60px); opacity: 0; } 100% { transform: translateX(60px); opacity: 0; } }
-@keyframes shine-l { 0% { transform: translateX(0); opacity: 1; } 39.4% { transform: translateX(-60px); opacity: 0; } 100% { transform: translateX(-60px); opacity: 0; } }
-
-/* ---------- Nav ---------- */
+/* ---------- Nav: appears once the hero has scrolled away ---------- */
 .nav {
   position: fixed; top: 0; left: 50%; z-index: 50;
-  width: 100%; max-width: var(--col);
-  padding: 12px 12px 20px 20px;
-  background: linear-gradient(180deg, rgba(228,246,245,.72) 0%, rgba(171,171,171,0) 85%);
-  transform: translate(-50%, -150px); opacity: 0;
-  transition: transform .4s var(--ease), opacity .4s var(--ease);
-  pointer-events: none;
+  width: 100%; max-width: var(--col); padding: 10px 12px 0;
+  transform: translate(-50%, -120%); opacity: 0; pointer-events: none;
+  transition: transform .4s var(--ease), opacity .3s var(--ease);
 }
-.nav.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; transition: transform .4s var(--spring), opacity .3s var(--ease); }
+.nav.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; transition: transform .45s var(--spring), opacity .3s var(--ease); }
 .nav-pill {
   display: flex; align-items: center; justify-content: space-between;
-  height: 68px; padding: 9px 8px 9px 24px; border-radius: 33px;
-  background: rgba(150,215,212,.16);
-  backdrop-filter: blur(23px); -webkit-backdrop-filter: blur(23px);
+  height: 64px; padding: 8px 8px 8px 22px; border-radius: 999px;
+  background: rgba(12,31,30,.62);
+  backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1), inset 0 1px 0 rgba(255,255,255,.12), 0 10px 30px -12px rgba(12,31,30,.45);
 }
-.logo { display: block; height: 26px; }
-.logo img { height: 100%; width: auto; filter: drop-shadow(0 1px 6px rgba(0,60,58,.25)); }
+.logo { display: block; height: 24px; }
+.logo img { height: 100%; width: auto; }
+.nav .btn { height: 46px; }
 
-/* ---------- 1. Home (Coming Soon) ---------- */
-.home { position: relative; height: 796px; color: #fff; overflow: hidden; }
-.home > img { position: absolute; inset: 0; width: 100%; height: 804px; object-fit: cover; object-position: 50% 0%; }
-.home .grey-blur { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(153,238,255,0) 0%, rgb(171,171,171) 100%); }
-.home .name { position: absolute; top: 44px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
-.home .intro { font: 400 15px/1.2 Montserrat, sans-serif; letter-spacing: .08em; color: var(--teal-deep); }
-.home .wordmark { margin-top: 14px; }
-.home .wordmark img { width: 250px; height: auto; }
-/* Lockup reveal: wipes in left to right (stand-in for the per-letter flip until the brand fonts are in) */
-.home .wordmark img { clip-path: inset(0 100% 0 0); animation: wipe 1s var(--spring-soft) .1s forwards; }
+/* ---------- 1. Home ---------- */
+.home {
+  position: relative; isolation: isolate; min-height: 100vh; min-height: 100dvh; color: #fff; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: max(40px, env(safe-area-inset-top)) 24px max(28px, env(safe-area-inset-bottom));
+}
+.home > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; z-index: -2; }
+.home::after { content: ""; position: absolute; inset: 0; z-index: -1; background:
+  linear-gradient(180deg, rgba(247,247,247,.9) 0, rgba(247,247,247,.6) 150px, rgba(247,247,247,0) 230px),
+  linear-gradient(180deg, rgba(6,24,23,0) 50%, rgba(6,24,23,.35) 68%, rgba(6,24,23,.82) 100%); }
+.home .name { display: flex; flex-direction: column; align-items: center; }
+.home .eyebrow { font: 500 13px/1 Outfit, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-deep); }
+.home .wordmark { margin-top: 16px; }
+.home .wordmark img { width: 240px; height: auto; clip-path: inset(0 100% 0 0); animation: wipe 1s var(--spring-soft) .1s forwards; }
 @keyframes wipe { to { clip-path: inset(0 0 0 0); } }
-.home .building {
-  position: absolute; top: 494px; right: 45px; width: 208px;
-  font: 300 18px/1.2 Inter, sans-serif; text-align: right;
-}
-.home .building::before { content: ""; position: absolute; top: 0; right: calc(100% + 10px); width: 66px; height: 1px; background: #fff; }
-.home .crafted {
-  position: absolute; top: 577px; left: 59px; width: 147px;
-  font: 300 20px/1.2 Inter, sans-serif; text-align: right; text-transform: uppercase;
-}
-.home .crafted-line { position: absolute; top: 577px; right: 11px; width: 26px; height: 1px; background: #fff; }
-.home .cta { position: absolute; top: 728px; left: 36px; right: 36px; display: flex; align-items: center; justify-content: space-between; }
-.home .soon { display: flex; align-items: center; gap: 11px; font: 300 12px/1.2 Inter, sans-serif; }
-.home .soon i { width: 20px; height: 1px; background: #fff; }
+.home .bottom { display: flex; flex-direction: column; gap: 22px; }
+.home .lede { font: 300 21px/1.35 Outfit, sans-serif; max-width: 30ch; text-wrap: balance; text-shadow: 0 1px 12px rgba(0,0,0,.25); }
+.home .lede strong { font-weight: 500; }
+.home .glow-btn { width: 100%; }
 
-/* Text effect: per-character flip-in (rotateY 90 -> 0), 0.05s stagger */
-.fx .w { display: inline-block; white-space: nowrap; }
-.fx .c { display: inline-block; opacity: .001; transform: rotateY(90deg); }
-.fx.go .c { animation: flip .4s var(--spring-soft) forwards; animation-delay: calc(var(--start, 0s) + var(--i) * .05s); }
+/* Text effect: word-by-word flip-in */
+.fx .w { display: inline-block; opacity: .001; transform: rotateY(90deg); }
+.fx.go .w { animation: flip .5s var(--spring-soft) forwards; animation-delay: calc(var(--start, 0s) + var(--i) * .06s); }
 @keyframes flip { to { opacity: 1; transform: rotateY(0); } }
 
-/* ---------- 2. Info about CGM ---------- */
-.info { padding: 52px 32px; background: var(--bg); transform-origin: 50% 0; will-change: transform; }
-.info .body { margin-top: 14px; }
+/* ---------- 2. Intro ---------- */
+.info { padding: 64px 28px 56px; }
+.info .body { margin-top: 16px; }
 
-/* ---------- Carousels (native scroll-snap, like Framer's Carousel) ---------- */
+/* ---------- Carousel (scroll-snap) ---------- */
 .carousel { position: relative; }
-.track {
-  display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-  -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
-}
+.track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
 .track::-webkit-scrollbar { display: none; }
 .track > * { flex: 0 0 100%; scroll-snap-align: center; }
 .dots {
-  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
-  display: flex; gap: 20px; padding: 12px; background: var(--bg);
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 4px 8px; border-radius: 999px;
+  background: rgba(247,247,247,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-.dots button { border: 0; padding: 0; background: var(--teal); border-radius: 50%; cursor: pointer; transition: opacity .3s var(--ease); }
+/* 24px tap target around a 6px dot */
+.dots button { width: 24px; height: 24px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; border-radius: 50%; }
+.dots button::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); opacity: .4; transition: opacity .3s var(--ease), transform .3s var(--ease); }
+.dots button[aria-current="true"]::before { opacity: 1; transform: scale(1.3); }
 
-/* 3. Benefits carousel */
-.benefits { padding-bottom: 16px; }
-.benefits .track { gap: 24px; padding-bottom: 36px; }
-.benefit { position: relative; height: 654px; background: #fff; }
+/* 3. Benefits */
+.benefits { padding-bottom: 20px; }
+.benefits .track { gap: 24px; padding-bottom: 44px; }
+.benefit { position: relative; background: var(--card); padding-bottom: 36px; }
 .benefit .photo { width: 100%; aspect-ratio: 1; object-fit: cover; }
-.benefit .mock { position: absolute; top: 200px; right: -10px; width: 177px; height: 259px; object-fit: contain; }
-.benefit .copy { padding: 45px 32px 0; }
-.benefit .copy .body { margin-top: 11px; max-width: 294px; }
-.benefits .dots { border-radius: 17px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); bottom: 0; }
-.benefits .dots button { width: 6px; height: 6px; opacity: .5; }
-.benefits .dots button[aria-current="true"] { opacity: 1; }
+.benefit .mock { position: absolute; top: 200px; right: -10px; width: 177px; height: 259px; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(12,31,30,.28)); }
+.benefit .copy { padding: 40px 28px 0; }
+.benefit .copy .body { margin-top: 10px; max-width: 30ch; }
 
-/* 4. Make a statement (auto-playing slideshow) */
-.statement { background: #000; padding-bottom: 32px; }
-.statement h2 { font: 700 32px/1.2 Montserrat, sans-serif; color: #fff; padding: 48px 25px; }
+/* 4. Make a statement */
+.statement { background: var(--ink); padding-bottom: 36px; }
+.statement header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 52px 24px 28px; }
+.statement h2 { font: 600 30px/1.1 Outfit, sans-serif; letter-spacing: -.02em; color: #fff; }
+.pause {
+  flex: none; height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.06); color: #fff; font: 500 13px/1 Outfit, sans-serif;
+  transition: background .2s var(--ease);
+}
+.pause:hover { background: rgba(255,255,255,.14); }
 .slideshow { overflow: hidden; touch-action: pan-y; cursor: grab; }
 .slideshow .reel { display: flex; will-change: transform; }
 .slideshow .slide { flex: 0 0 100%; }
 .slideshow .slide img { width: 100%; height: 525px; object-fit: cover; pointer-events: none; user-select: none; }
 .slideshow .slide img.bottom { object-position: center bottom; }
-.slideshow .slide p { font: 400 24px/1.2 Montserrat, sans-serif; color: #fff; padding: 19px 25px 0; }
+.slideshow .slide p { font: 500 22px/1.2 Outfit, sans-serif; letter-spacing: .06em; color: #fff; padding: 18px 24px 0; }
 
 /* 5. Colourways */
-.colorways { position: relative; height: 657px; background: var(--bg); display: grid; place-items: center; }
-.colorways .stage { position: relative; width: 362px; max-width: 92%; aspect-ratio: .99; }
+.colorways { position: relative; padding: 72px 0 60px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.colorways .stage { position: relative; width: 340px; max-width: 88%; aspect-ratio: 1; }
 .colorways .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s var(--ease); }
 .colorways .stage img.dark { opacity: 0; }
 .colorways[data-v="dark"] .stage img.dark { opacity: 1; }
 .colorways[data-v="dark"] .stage img.light { opacity: 0; }
 .toggle {
-  position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%);
-  width: 240px; height: 48px; border-radius: 30px; display: grid; grid-template-columns: 1fr 1fr;
-  background: rgba(247,247,247,.39); box-shadow: 0 0 16px 4px rgba(0,0,0,.08);
-  backdrop-filter: blur(62px); -webkit-backdrop-filter: blur(62px);
+  position: relative; width: 240px; height: 48px; border-radius: 999px; display: grid; grid-template-columns: 1fr 1fr;
+  background: rgba(255,255,255,.6); box-shadow: inset 0 0 0 1px var(--line), 0 0 16px 4px rgba(12,31,30,.06);
+  backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
 }
 .toggle .knob {
-  position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: 40px; border-radius: 30px; background: #fff;
-  box-shadow: 0 .6px .6px -1.5px rgba(0,0,0,.1), 0 2.3px 2.3px -3px rgba(0,0,0,.086), 0 10px 10px -4.5px rgba(0,0,0,.012);
+  position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: 40px; border-radius: 999px; background: #fff;
+  box-shadow: 0 1px 2px rgba(12,31,30,.12), 0 6px 12px -6px rgba(12,31,30,.2);
   transition: transform .4s var(--spring), background-color .4s var(--ease);
 }
-.colorways[data-v="dark"] .knob { transform: translateX(100%); background: rgb(46,46,46); }
-.toggle button { position: relative; border: 0; background: none; cursor: pointer; font: 400 16px/1.2 Roboto, sans-serif; color: rgba(0,0,0,.12); transition: color .4s var(--ease); }
-.colorways[data-v="light"] .toggle [data-v="light"] { color: #000; }
+.colorways[data-v="dark"] .knob { transform: translateX(100%); background: #2E2E2E; }
+.toggle button { position: relative; border: 0; background: none; cursor: pointer; border-radius: 999px; font: 500 15px/1 Outfit, sans-serif; color: var(--grey-soft); transition: color .4s var(--ease); }
+.colorways[data-v="light"] .toggle [data-v="light"] { color: var(--ink); }
 .colorways[data-v="dark"]  .toggle [data-v="dark"]  { color: #fff; }
 
 /* 6. Technical craft */
-.craft { position: relative; height: 433px; overflow: hidden; }
-.craft .bg { position: absolute; left: 50%; top: 222px; width: 390px; margin: -70px 0 0 -195px; height: 140px; object-fit: contain; will-change: transform, opacity; }
-.craft h2 { position: absolute; top: 72px; left: 32px; right: 32px; }
-.craft .sub { position: absolute; top: 322px; left: 32px; right: 32px; }
+.craft { position: relative; height: 400px; overflow: hidden; }
+.craft .bg { position: absolute; left: 50%; top: 210px; width: 390px; margin: -70px 0 0 -195px; height: 140px; object-fit: contain; transform: scale(.8); }
+.craft h2 { position: absolute; top: 64px; left: 28px; right: 28px; }
+.craft .sub { position: absolute; top: 300px; left: 28px; right: 28px; }
 
-/* 7. Features carousel */
-.features .track { gap: 16px; padding-bottom: 14px; }
-.feature { height: 510px; background: #fff; padding: 16px; }
-.feature img { width: 100%; height: 272px; object-fit: cover; }
-.feature .copy { padding: 24px 4px 0; }
-.feature .copy .body { margin-top: 16px; max-width: 294px; }
-.features .dots { border-radius: 115px; bottom: 34px; background: transparent; }
-.features .dots button { width: 9px; height: 9px; opacity: .3; }
-.features .dots button[aria-current="true"] { opacity: 1; }
+/* 7. Features: vertical stack (all five visible, no swiping) */
+.features { padding: 0 20px 72px; display: grid; gap: 44px; }
+.feature img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; border-radius: var(--r-media); }
+.feature h3 { margin-top: 20px; }
+.feature .body { margin-top: 8px; }
 
-/* 8. Closing CTA */
-.closing { background: var(--bg); padding: 54px 0 0; }
-.closing .head { padding: 0 32px; }
-.closing .head .body { margin-top: 10px; }
-.closing .phone { height: 300px; margin-top: 32px; display: grid; place-items: center; }
-.closing .phone img { height: 300px; width: auto; transform: scale(.5); will-change: transform; }
-.closing .btn-wrap { padding: 38px 34px 53px; }
+/* 8. Waitlist */
+.waitlist { background: var(--card); padding: 64px 24px 56px; scroll-margin-top: 20px; }
+.waitlist .body { margin-top: 12px; }
+.waitlist .phone { height: 300px; margin: 36px 0 32px; display: grid; place-items: center; }
+.waitlist .phone img { height: 300px; width: auto; }
+.form { display: grid; gap: 8px; }
+.form label { font: 500 15px/1.2 Outfit, sans-serif; color: var(--ink); }
+.form input {
+  height: 52px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(12,31,30,.28); background: #fff; color: var(--ink);
+  font-size: 16px; transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.form input::placeholder { color: #6B7170; }
+.form input:focus { outline: none; border-color: var(--teal-deep); box-shadow: 0 0 0 3px rgba(1,176,171,.25); }
+.form input[aria-invalid="true"] { border-color: #B42318; }
+.form .hint { font-size: 14px; line-height: 1.4; color: var(--grey-soft); }
+.form .error { font-size: 14px; line-height: 1.4; color: #B42318; }
+.form .btn { margin-top: 8px; width: 100%; }
+.form .status { font-size: 14px; line-height: 1.4; color: var(--grey); min-height: 1px; }
+.done { padding: 20px; border-radius: var(--r-media); background: rgba(1,176,171,.08); box-shadow: inset 0 0 0 1px rgba(1,176,171,.3); }
+.done h3 { font: 600 20px/1.2 Outfit, sans-serif; color: var(--teal-text); }
+.done p { margin-top: 6px; }
 
 /* Footer */
-.foot { background: #fff; padding: 28px 16px 32px; text-align: center; font: 300 8px/1.2 Inter, sans-serif; letter-spacing: -.03em; color: var(--teal-deep); }
+.foot { background: var(--bg); padding: 28px 24px 36px; display: grid; justify-items: center; gap: 14px; text-align: center; }
+.foot img { width: 96px; height: auto; }
+.foot p { font: 400 12px/1.4 Outfit, sans-serif; color: var(--grey-soft); }
+
+/* ---------- Scroll-linked effects (CSS scroll timelines; static where unsupported) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .craft .bg { animation: craft-zoom linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
+    .waitlist .phone img { animation: grow linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+  }
+}
+@keyframes craft-zoom { from { transform: scale(4.2); opacity: .5; } to { transform: scale(.8); opacity: 1; } }
+@keyframes grow { from { transform: scale(.5); } to { transform: scale(1); } }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .fx .c { opacity: 1; transform: none; }
+  .fx .w { opacity: 1; transform: none; }
   .home .wordmark img { clip-path: none; }
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- Sticky nav: drops in, hides on scroll down, returns on scroll up -->
 <nav class="nav" id="nav" aria-label="Main">
   <div class="nav-pill">
-    <a href="#home" class="logo" aria-label="BLU by TITAN home"><img src="brand/blu-mark-white.png" alt=""></a>
-    <a href="#waitlist" class="glow-btn"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join</a>
+    <a href="#home" class="logo" aria-label="BLU by TITAN, back to top"><img src="brand/blu-mark-white.png" alt=""></a>
+    <a href="#waitlist" class="btn" data-join>Join the waitlist</a>
   </div>
 </nav>
 
-<main class="site">
+<main class="site" id="main">
 
-  <!-- 1. HOME (Coming Soon design) -->
+  <!-- 1. HOME -->
   <section class="home" id="home">
-    <img src="images/00-home-hero-woman-street-sensor.jpg" alt="Woman on a city street wearing the BLU sensor on her upper arm" fetchpriority="high">
-    <div class="grey-blur"></div>
+    <img src="images/web/00-home-hero-woman-street-sensor.webp" alt="Woman on a city street wearing the BLU sensor on her upper arm" fetchpriority="high">
     <div class="name">
-      <p class="intro">INTRODUCING</p>
+      <p class="eyebrow">Coming soon</p>
       <h1 class="wordmark"><img src="brand/lockup-color.png" alt="BLU by TITAN"></h1>
     </div>
-    <h2 class="building fx" data-start=".8">we are building something awesome</h2>
-    <h2 class="crafted fx" data-start=".8">Crafted to enhance your metabolic health</h2>
-    <div class="crafted-line"></div>
-    <div class="cta">
-      <p class="soon fx" data-start=".8"><span>COMING</span><i></i><span>SOON</span></p>
-      <a href="#waitlist" class="glow-btn"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
+    <div class="bottom">
+      <p class="lede fx" data-start=".6">A continuous glucose monitor from Titan. <strong>Your glucose every 5 minutes,</strong> on your phone.</p>
+      <a href="#waitlist" class="glow-btn" data-join><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join the waitlist</a>
     </div>
   </section>
 
-  <!-- 2. INFO -->
-  <section class="info" data-scroll-fx="info">
-    <h2 class="h-display">Take healthy decisions, with our new continuous glucose monitor</h2>
-    <p class="body">Built with cutting-edge tech and precision sensors, enhance your routine with real-time insights, predictive tracking and seamless integration with your life</p>
+  <!-- 2. INTRO -->
+  <section class="info">
+    <h2 class="h-display">Healthier choices, backed by your own glucose data</h2>
+    <p class="body">BLU reads your glucose in real time, shows where it's heading and fits into your day without getting in the way.</p>
   </section>
 
-  <!-- 3. BENEFITS CAROUSEL -->
-  <section class="carousel benefits" aria-roledescription="carousel" aria-label="Benefits">
+  <!-- 3. BENEFITS -->
+  <section class="carousel benefits" aria-roledescription="carousel" aria-label="What BLU does for you">
     <div class="track">
-      <article class="benefit">
-        <img class="photo" src="images/04-feature-photo-cyclist.jpg" alt="Cyclist wearing the sensor" loading="lazy">
-        <img class="mock" src="images/07-app-screen-daily-score-85.png" alt="App screen showing a daily score of 85" loading="lazy">
-        <div class="copy"><h3 class="h-label">Compete with<br>yourself</h3><p class="body">Get a daily glucose score that shows how well you performed, pushing you to stay on top of your game</p></div>
+      <article class="benefit" aria-roledescription="slide" aria-label="1 of 3">
+        <img class="photo" src="images/web/04-feature-photo-cyclist.webp" alt="Cyclist standing with his bike, wearing the BLU sensor" loading="lazy">
+        <img class="mock" src="images/web/07-app-screen-daily-score-85.webp" alt="BLU app showing a daily glucose score" loading="lazy">
+        <div class="copy"><h3 class="h-sub">Compete with yourself</h3><p class="body">A daily glucose score shows how your day went, so you can beat it tomorrow.</p></div>
       </article>
-      <article class="benefit">
-        <img class="photo" src="images/03-feature-photo-woman-reading-in-bed.jpg" alt="Woman reading in bed wearing the sensor" loading="lazy">
-        <img class="mock" src="images/08-app-screen-history-graph.png" alt="App screen showing glucose history" loading="lazy">
-        <div class="copy"><h3 class="h-label">You are in<br>control</h3><p class="body">BLU tracks glucose every 5 minutes for 15 days continuously. It detects subtle change in glucose levels, offering early insights and suggests habit changes</p></div>
+      <article class="benefit" aria-roledescription="slide" aria-label="2 of 3">
+        <img class="photo" src="images/web/03-feature-photo-woman-reading-in-bed.webp" alt="Woman reading in bed, wearing the BLU sensor" loading="lazy">
+        <img class="mock" src="images/web/08-app-screen-history-graph.webp" alt="BLU app showing a glucose history graph" loading="lazy">
+        <div class="copy"><h3 class="h-sub">You are in control</h3><p class="body">BLU checks your glucose every 5 minutes for 15 days straight. It spots changes early and suggests habits to adjust.</p></div>
       </article>
-      <article class="benefit">
-        <img class="photo" src="images/05-feature-photo-woman-on-bench.jpg" alt="Woman on a bench wearing the sensor" loading="lazy">
-        <img class="mock" src="images/06-app-screen-new-log-food.png" alt="App screen logging a meal" loading="lazy">
-        <div class="copy"><h3 class="h-label">Harness the power of AI</h3><p class="body">BLU pushes you forward with reminders for hydration, meals, and exercise, empowering you to stay fueled and ready to take on every challenge</p></div>
+      <article class="benefit" aria-roledescription="slide" aria-label="3 of 3">
+        <img class="photo" src="images/web/05-feature-photo-woman-on-bench.webp" alt="Woman sitting on a garden bench, wearing the BLU sensor" loading="lazy">
+        <img class="mock" src="images/web/06-app-screen-new-log-food.webp" alt="BLU app logging a meal" loading="lazy">
+        <div class="copy"><h3 class="h-sub">Reminders that know your day</h3><p class="body">BLU nudges you to drink water, eat and move, based on what your glucose is doing.</p></div>
       </article>
     </div>
-    <div class="dots"></div>
+    <div class="dots" role="group" aria-label="Choose slide"></div>
   </section>
 
   <!-- 4. MAKE A STATEMENT -->
-  <section class="statement">
-    <h2>Make a statement</h2>
-    <div class="slideshow" aria-roledescription="carousel" aria-label="Make a statement">
-      <div class="reel">
-        <div class="slide"><img src="images/09-statement-woman-white-dress.jpg" alt="" loading="lazy"><p>UNHIDE</p></div>
-        <div class="slide"><img src="images/10-statement-man-smoke.jpg" alt="" loading="lazy"><p>SHOWOFF</p></div>
-        <div class="slide"><img src="images/11-statement-woman-poolside.jpg" alt="" loading="lazy"><p>BE BOLD</p></div>
-        <div class="slide"><img class="bottom" src="images/12-statement-woman-white-dress-alt.jpg" alt="" loading="lazy"><p>STANDOUT</p></div>
+  <section class="statement" aria-label="Make a statement">
+    <header>
+      <h2>Make a statement</h2>
+      <button type="button" class="pause" aria-pressed="false">Pause</button>
+    </header>
+    <div class="slideshow" aria-roledescription="carousel" aria-label="People wearing BLU">
+      <div class="reel" aria-live="off">
+        <div class="slide"><img src="images/web/09-statement-woman-white-dress.webp" alt="Woman in a white off-shoulder top with the BLU sensor on her arm" loading="lazy"><p>UNHIDE</p></div>
+        <div class="slide"><img src="images/web/10-statement-man-smoke.webp" alt="Man walking through smoke, wearing the BLU sensor" loading="lazy"><p>SHOWOFF</p></div>
+        <div class="slide"><img src="images/web/11-statement-woman-poolside.webp" alt="Woman sitting by a pool with the BLU sensor on her arm" loading="lazy"><p>BE BOLD</p></div>
+        <div class="slide"><img class="bottom" src="images/web/12-statement-woman-white-dress-alt.webp" alt="Woman in a white top, the BLU sensor visible on her arm" loading="lazy"><p>STANDOUT</p></div>
       </div>
     </div>
   </section>
 
   <!-- 5. COLOURWAYS -->
-  <section class="colorways" data-v="light">
+  <section class="colorways" data-v="light" aria-label="Colourways">
+    <h2 class="h-display">Two colourways</h2>
     <div class="stage">
-      <img class="light" src="images/13-product-sensor-moonlight.png" alt="BLU sensor in Moonlight" loading="lazy">
-      <img class="dark" src="images/13b-product-sensor-dark-night.png" alt="BLU sensor in Dark Night" loading="lazy">
+      <img class="light" src="images/web/13-product-sensor-moonlight.webp" alt="BLU sensor in Moonlight, a white base with a black top" loading="lazy">
+      <img class="dark" src="images/web/13b-product-sensor-dark-night.webp" alt="BLU sensor in Dark Night, all black" loading="lazy">
     </div>
-    <div class="toggle" role="group" aria-label="Colourway">
+    <div class="toggle" role="group" aria-label="Choose a colourway">
       <span class="knob"></span>
       <button type="button" data-v="light" aria-pressed="true">Moonlight</button>
       <button type="button" data-v="dark" aria-pressed="false">Dark Night</button>
@@ -336,162 +360,164 @@ a { color: inherit; text-decoration: none; }
 
   <!-- 6. TECHNICAL CRAFT -->
   <section class="craft">
-    <img class="bg" src="images/14-product-sensor-internals.png" alt="" data-scroll-fx="craft" loading="lazy">
+    <img class="bg" src="images/web/14-product-sensor-internals.webp" alt="" loading="lazy">
     <h2 class="h-display">The technical craft</h2>
-    <p class="body sub">Engineered for action and built to inspire.<br>See what makes BLU unique</p>
+    <p class="body sub">What goes into every BLU sensor, and why it matters.</p>
   </section>
 
-  <!-- 7. FEATURES CAROUSEL -->
-  <section class="carousel features" aria-roledescription="carousel" aria-label="Features">
-    <div class="track">
-      <article class="feature"><img src="images/15-tech-sweat-proof-sensor-on-arm.jpg" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Sweat-proof performance</h3><p class="body">IP5X water proofing to reach your goals without a pause</p></div></article>
-      <article class="feature"><img src="images/16-tech-long-lasting-man-on-stairs.jpg" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Long-lasting<br>endurance</h3><p class="body">Replace BLU twice a month. Get order reminders on the App when you are low on stock, automatically</p></div></article>
-      <article class="feature"><img src="images/17-tech-comfort-feet-in-hammock.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Engineered for all-day comfort</h3><p class="body">Non-woven polyester patch and a skin friendly adhesive provides makes sure the BLU is comfortable day and night</p></div></article>
-      <article class="feature"><img src="images/18-tech-hygiene-abstract.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Hygiene-first<br>design</h3><p class="body">ETO sterilization ensures a sterile BLU pack decontaminated and delivered every single time</p></div></article>
-      <article class="feature"><img src="images/19-tech-dataglance-phone-watch-widgets.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">dataGlance™ by BLU</h3><p class="body">The BLU app comes with useful widgets for mobile devices, so you stay updated, always</p></div></article>
-    </div>
-    <div class="dots"></div>
+  <!-- 7. FEATURES -->
+  <section class="features" aria-label="Sensor features">
+    <!-- TODO: confirm the ingress rating with the product team. The old copy said "IP5X water proofing", but IP5X is a dust rating with no water rating. -->
+    <article class="feature"><img src="images/web/15-tech-sweat-proof-sensor-on-arm.webp" alt="Close-up of the BLU sensor on an arm beside a pool" loading="lazy"><h3 class="h-sub">Sweat-proof</h3><p class="body">Keeps tracking through workouts, without a pause.</p></article>
+    <article class="feature"><img src="images/web/16-tech-long-lasting-man-on-stairs.webp" alt="Man climbing outdoor stairs, wearing the BLU sensor" loading="lazy"><h3 class="h-sub">15 days per sensor</h3><p class="body">Swap it twice a month. The app reminds you to reorder before you run out.</p></article>
+    <article class="feature"><img src="images/web/17-tech-comfort-feet-in-hammock.webp" alt="Bare feet resting in a soft fabric hammock" loading="lazy"><h3 class="h-sub">Comfortable all day</h3><p class="body">A soft, non-woven polyester patch and a skin-friendly adhesive keep BLU comfortable day and night.</p></article>
+    <article class="feature"><img src="images/web/18-tech-hygiene-abstract.webp" alt="Abstract pattern of colourful light" loading="lazy"><h3 class="h-sub">Sterile every time</h3><p class="body">Every BLU pack is ETO-sterilised and sealed, so it reaches you sterile.</p></article>
+    <article class="feature"><img src="images/web/19-tech-dataglance-phone-watch-widgets.webp" alt="BLU glucose widgets on an iPhone and an Apple Watch" loading="lazy"><h3 class="h-sub">dataGlance™ widgets</h3><p class="body">See your glucose on your phone and watch home screens, without opening the app.</p></article>
   </section>
 
-  <!-- 8. CLOSING CTA -->
-  <section class="closing" id="waitlist">
-    <div class="head">
-      <h2 class="h-label">So far, so good?</h2>
-      <p class="body">Be among the first to try BLU</p>
-    </div>
-    <div class="phone"><img src="images/20-waitlist-app-102-with-sensor.png" alt="BLU app showing 102 mg/dL next to the sensor" data-scroll-fx="phone" loading="lazy"></div>
-    <div class="btn-wrap">
-      <a href="#" class="shine-btn"><span class="shine top"></span><span class="shine bottom"></span>Join Waitlist</a>
-    </div>
+  <!-- 8. WAITLIST -->
+  <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
+    <h2 class="h-display" id="waitlist-title">Be among the first to try BLU</h2>
+    <p class="body">Join the waitlist and we'll email you when BLU launches.</p>
+    <div class="phone"><img src="images/web/20-waitlist-app-102-with-sensor.webp" alt="BLU app showing a glucose reading of 102 mg/dL next to the sensor" loading="lazy"></div>
+
+    <!-- Set data-endpoint to a form service URL (Formspree, Basin, a Google Apps Script, your API) that accepts a JSON POST of { email }. -->
+    <form class="form" id="waitlist-form" data-endpoint="" novalidate>
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required aria-describedby="email-hint email-error">
+      <p class="hint" id="email-hint">We'll only use it to tell you about the BLU launch.</p>
+      <p class="error" id="email-error" hidden></p>
+      <button type="submit" class="btn">Join the waitlist</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </form>
   </section>
 
-  <footer class="foot">images are for representation. actual product may vary.</footer>
+  <footer class="foot">
+    <img src="brand/lockup-color.png" alt="BLU by TITAN">
+    <p>Images are for representation. Actual product may vary.</p>
+  </footer>
 </main>
 
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-  const lerp = (a, b, t) => a + (b - a) * t;
 
-  /* --- Text effect: split into characters, flip in on load --- */
+  /* --- Hero text: split into words, flip in --- */
   document.querySelectorAll('.fx').forEach(el => {
     let i = 0;
-    const split = node => {
-      [...node.childNodes].forEach(n => {
-        if (n.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(word => {
-            if (!word) return;
-            if (/^\s+$/.test(word)) { frag.append(' '); return; }
-            const w = document.createElement('span'); w.className = 'w';
-            [...word].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.style.setProperty('--i', i++); c.textContent = ch; w.append(c); });
-            frag.append(w);
-          });
-          n.replaceWith(frag);
-        } else if (n.nodeType === 1 && n.tagName !== 'I') split(n);
-      });
-    };
+    const split = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.append(' '); return; }
+          const w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--i', i++); w.textContent = part; frag.append(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) split(n);
+    });
     split(el);
     el.style.setProperty('--start', (el.dataset.start || 0) + 's');
     requestAnimationFrame(() => el.classList.add('go'));
   });
 
-  /* --- Nav: appears once past the home hero; hides on scroll down, shows on scroll up --- */
+  /* --- Nav: shown once the hero is mostly out of view --- */
   const nav = document.getElementById('nav');
-  const home = document.getElementById('home');
-  let lastY = scrollY;
-  addEventListener('scroll', () => {
-    const y = scrollY, pastHome = y > home.offsetHeight * .6;
-    if (!pastHome) nav.classList.remove('show');
-    else if (y < lastY - 2) nav.classList.add('show');
-    else if (y > lastY + 2) nav.classList.remove('show');
-    lastY = y;
-  }, { passive: true });
+  new IntersectionObserver(([e]) => nav.classList.toggle('show', !e.isIntersecting), { threshold: 0, rootMargin: '-60% 0px 0px 0px' })
+    .observe(document.getElementById('home'));
 
-  /* --- Scroll-linked transforms (Framer "onScroll" effects, spring-smoothed) --- */
-  const fx = [
-    { el: document.querySelector('[data-scroll-fx="info"]'),  from: { rx: 10 },          to: { rx: 0 } },
-    { el: document.querySelector('[data-scroll-fx="craft"]'), from: { s: 4.2, o: .5 },  to: { s: .8, o: 1 } },
-    { el: document.querySelector('[data-scroll-fx="phone"]'), from: { s: .5 },          to: { s: 1 } },
-  ].map(f => ({ ...f, p: 0 }));
-  const apply = f => {
-    const v = k => lerp(f.from[k], f.to[k], f.p);
-    const t = [];
-    if ('rx' in f.from) t.push(`rotateX(${v('rx')}deg)`);
-    if ('s' in f.from) t.push(`scale(${v('s')})`);
-    f.el.style.transform = t.join(' ');
-    if ('o' in f.from) f.el.style.opacity = v('o');
-  };
-  const tick = () => {
-    const vh = innerHeight;
-    fx.forEach(f => {
-      const r = f.el.getBoundingClientRect();
-      // 0 when the layer's top enters at the bottom of the screen, 1 when it reaches 35% from the top
-      const target = clamp((vh - r.top) / (vh * .65), 0, 1);
-      f.p = reduce ? target : lerp(f.p, target, .12);
-      apply(f);
-    });
-    requestAnimationFrame(tick);
-  };
-  tick();
+  /* --- Join buttons: scroll to the form and focus the email field --- */
+  const email = document.getElementById('email');
+  document.querySelectorAll('[data-join]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('waitlist').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => email && email.focus({ preventScroll: true }), reduce ? 0 : 600);
+  }));
 
-  /* --- Scroll-snap carousels with progress dots --- */
+  /* --- Benefits carousel dots (IntersectionObserver, no scroll listeners) --- */
   document.querySelectorAll('.carousel').forEach(c => {
-    const track = c.querySelector('.track'), dots = c.querySelector('.dots');
-    const items = [...track.children];
-    items.forEach((_, i) => {
-      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Go to slide ${i + 1}`);
-      b.onclick = () => track.scrollTo({ left: items[i].offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
-      dots.append(b);
+    const track = c.querySelector('.track'), dots = c.querySelector('.dots'), items = [...track.children];
+    const btns = items.map((item, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Show slide ${i + 1} of ${items.length}`);
+      b.onclick = () => track.scrollTo({ left: item.offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+      dots.append(b); return b;
     });
-    const update = () => {
-      const i = Math.round(track.scrollLeft / (items[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0)));
-      [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i));
-    };
-    track.addEventListener('scroll', update, { passive: true }); update();
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) btns.forEach((b, k) => b.setAttribute('aria-current', items[k] === e.target));
+    }), { root: track, threshold: .6 });
+    items.forEach(i => io.observe(i));
   });
 
-  /* --- "Make a statement" slideshow: autoplay every 2s, infinite, draggable --- */
-  const ss = document.querySelector('.slideshow'), reel = ss.querySelector('.reel');
+  /* --- Statement slideshow: autoplay 2s, loops, draggable, pausable, pauses off-screen --- */
+  const ss = document.querySelector('.slideshow'), reel = ss.querySelector('.reel'), pauseBtn = document.querySelector('.pause');
   const originals = [...reel.children];
-  reel.append(originals[0].cloneNode(true));           // clone for a seamless loop
-  let idx = 0, timer, dragX = null, dx = 0;
+  const clone = originals[0].cloneNode(true); clone.setAttribute('aria-hidden', 'true'); clone.querySelector('img').alt = ''; reel.append(clone);
+  let idx = 0, timer = null, dragX = null, dx = 0, userPaused = reduce, onScreen = false, hovered = false;
   const go = (n, animate = true) => {
     idx = n;
     reel.style.transition = animate && !reduce ? 'transform .7s var(--spring-soft)' : 'none';
     reel.style.transform = `translateX(${-idx * 100}%)`;
   };
-  reel.addEventListener('transitionend', () => {
-    if (idx === originals.length) go(0, false);
-    if (idx < 0) go(originals.length - 1, false);
-  });
-  const play = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => go(idx + 1), 2000); };
-  ss.addEventListener('pointerdown', e => { dragX = e.clientX; dx = 0; clearInterval(timer); reel.style.transition = 'none'; ss.setPointerCapture(e.pointerId); });
-  ss.addEventListener('pointermove', e => {
-    if (dragX === null) return;
-    dx = e.clientX - dragX;
-    reel.style.transform = `translateX(calc(${-idx * 100}% + ${dx}px))`;
-  });
+  reel.addEventListener('transitionend', () => { if (idx === originals.length) go(0, false); });
+  const sync = () => {
+    clearInterval(timer); timer = null;
+    if (!userPaused && onScreen && !hovered && dragX === null) timer = setInterval(() => go(idx + 1), 2000);
+    pauseBtn.textContent = userPaused ? 'Play' : 'Pause';
+    pauseBtn.setAttribute('aria-pressed', String(userPaused));
+  };
+  pauseBtn.addEventListener('click', () => { userPaused = !userPaused; sync(); });
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }, { threshold: .25 }).observe(ss);
+  ss.addEventListener('mouseenter', () => { hovered = true; sync(); });
+  ss.addEventListener('mouseleave', () => { hovered = false; sync(); });
+  ss.addEventListener('pointerdown', e => { dragX = e.clientX; dx = 0; sync(); reel.style.transition = 'none'; ss.setPointerCapture(e.pointerId); });
+  ss.addEventListener('pointermove', e => { if (dragX === null) return; dx = e.clientX - dragX; reel.style.transform = `translateX(calc(${-idx * 100}% + ${dx}px))`; });
   const end = () => {
     if (dragX === null) return;
     dragX = null;
     if (dx < -40) go(idx + 1);
-    else if (dx > 40) { if (idx === 0) go(originals.length, false), requestAnimationFrame(() => requestAnimationFrame(() => go(originals.length - 1))); else go(idx - 1); }
-    else go(idx);
-    play();
+    else if (dx > 40) {
+      if (idx === 0) { go(originals.length, false); requestAnimationFrame(() => requestAnimationFrame(() => go(originals.length - 1))); }
+      else go(idx - 1);
+    } else go(idx);
+    sync();
   };
   ss.addEventListener('pointerup', end); ss.addEventListener('pointercancel', end);
-  ss.addEventListener('mouseenter', () => clearInterval(timer));   // Framer "On Hover: Pause"
-  ss.addEventListener('mouseleave', play);
-  play();
+  sync();
 
   /* --- Colourway toggle --- */
   const cw = document.querySelector('.colorways');
   cw.querySelectorAll('.toggle button').forEach(b => b.addEventListener('click', () => {
     cw.dataset.v = b.dataset.v;
-    cw.querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    cw.querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   }));
+
+  /* --- Waitlist form --- */
+  const form = document.getElementById('waitlist-form');
+  const err = document.getElementById('email-error'), status = form.querySelector('.status'), submit = form.querySelector('button[type=submit]');
+  const showError = msg => { err.textContent = msg; err.hidden = !msg; email.setAttribute('aria-invalid', msg ? 'true' : 'false'); };
+  email.addEventListener('input', () => { if (email.getAttribute('aria-invalid') === 'true' && email.validity.valid) showError(''); });
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    status.textContent = '';
+    const value = email.value.trim();
+    if (!value) { showError('Enter your email address.'); email.focus(); return; }
+    if (!email.validity.valid) { showError('Enter an email address like name@example.com.'); email.focus(); return; }
+    showError('');
+    const endpoint = form.dataset.endpoint;
+    if (!endpoint) { status.textContent = "Sign-ups aren't open yet. Please check back soon."; return; }
+    submit.disabled = true; submit.textContent = 'Joining…'; form.setAttribute('aria-busy', 'true');
+    try {
+      const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ email: value }) });
+      if (!res.ok) throw new Error(res.status);
+      const done = document.createElement('div'); done.className = 'done'; done.tabIndex = -1;
+      done.innerHTML = '<h3>You\'re on the list</h3><p class="body"></p>';
+      done.querySelector('p').textContent = `We'll email ${value} when BLU launches.`;
+      form.replaceWith(done); done.focus();
+    } catch {
+      status.textContent = "We couldn't add you to the waitlist. Check your connection and try again.";
+      submit.disabled = false; submit.textContent = 'Join the waitlist'; form.removeAttribute('aria-busy');
+    }
+  });
 })();
 </script>
 </body>
