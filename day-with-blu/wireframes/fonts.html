@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLU Font Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Montserrat:wght@600&family=Roboto:wght@400&family=Unbounded:wght@400;600&family=Hanken+Grotesk:wght@400;500&family=Geologica:wght@200;400;700&family=Familjen+Grotesk:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { --accent: #0EA5E9; --text: #0369A1; --deep: #0369A1; --mid: #0284C7; --grey: #4F5352; --soft: #616363; --bg: #F7F7F7; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E9ECEE; color: #1b2023; font: 14px/1.5 system-ui, sans-serif; }
+header { max-width: 1500px; margin: 0 auto; padding: 28px 24px 6px; }
+header h1 { font-size: 20px; font-weight: 600; }
+header p { margin-top: 6px; max-width: 820px; color: #4c5357; }
+.grid { max-width: 1500px; margin: 0 auto; padding: 16px 24px 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 28px 20px; }
+.opt > h2 { font-size: 15px; font-weight: 600; }
+.opt > p { margin: 4px 0 12px; font-size: 13px; color: #4c5357; min-height: 38px; }
+.card { width: 330px; background: var(--bg); border-radius: 26px; overflow: hidden; box-shadow: 0 0 0 6px #15181b, 0 14px 30px rgba(0,0,0,.16); margin: 6px; }
+
+/* Shared layout: identical in every option; only the type variables change */
+.s { padding: 26px 24px; }
+.time { color: var(--soft); }
+.h { color: var(--text); margin-top: 6px; }
+.b { color: var(--grey); margin-top: 8px; max-width: 32ch; }
+.reading { display: flex; align-items: baseline; gap: 6px; margin-top: 18px; color: var(--text); font-variant-numeric: tabular-nums; }
+.reading small { color: var(--soft); }
+.rule { height: 1px; background: rgba(3,105,161,.15); margin: 0 24px; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 22px 24px; }
+.tile { background: #fff; border-radius: 14px; padding: 14px; }
+.tile b { display: block; color: var(--text); }
+.tile span { color: var(--soft); }
+.wl { background: #fff; padding: 26px 24px 28px; }
+.btn { display: grid; place-items: center; height: 46px; margin-top: 16px; border-radius: 999px; color: #fff; background: radial-gradient(60% 140% at 50% 50%, var(--deep), var(--mid)); }
+
+/* 1. Main (baseline) */
+.f1 .time { font: 600 12px/1.2 Montserrat, sans-serif; text-transform: uppercase; letter-spacing: .04em; }
+.f1 .h { font: 600 24px/1.2 Montserrat, sans-serif; text-transform: uppercase; }
+.f1 .b, .f1 .tile span { font: 400 16px/1.2 Roboto, sans-serif; }
+.f1 .tile span { font-size: 13px; }
+.f1 .reading b { font: 600 56px/1 Inter, sans-serif; } .f1 .reading small { font: 400 14px Roboto, sans-serif; }
+.f1 .tile b { font: 600 24px/1.1 Inter, sans-serif; }
+.f1 .wl .h { font: 600 32px/1.2 Inter, sans-serif; text-transform: none; }
+.f1 .btn { font: 500 18px/1 Inter, sans-serif; }
+
+/* 2. Extended: Unbounded + Hanken Grotesk */
+.f2 .time { font: 500 13px/1.2 "Hanken Grotesk", sans-serif; }
+.f2 .h { font: 600 23px/1.15 Unbounded, sans-serif; letter-spacing: -.02em; }
+.f2 .b, .f2 .tile span { font: 400 16px/1.55 "Hanken Grotesk", sans-serif; }
+.f2 .tile span { font-size: 13px; line-height: 1.3; }
+.f2 .reading b { font: 400 56px/1 Unbounded, sans-serif; letter-spacing: -.04em; } .f2 .reading small { font: 500 14px "Hanken Grotesk", sans-serif; }
+.f2 .tile b { font: 600 22px/1.1 Unbounded, sans-serif; letter-spacing: -.03em; }
+.f2 .wl .h { font: 600 26px/1.15 Unbounded, sans-serif; letter-spacing: -.03em; }
+.f2 .btn { font: 500 17px/1 "Hanken Grotesk", sans-serif; }
+
+/* 3. One family: Geologica, extreme weights */
+.f3 .time { font: 400 13px/1.2 Geologica, sans-serif; }
+.f3 .h { font: 700 27px/1.1 Geologica, sans-serif; letter-spacing: -.03em; }
+.f3 .b, .f3 .tile span { font: 200 17px/1.55 Geologica, sans-serif; color: #3c4140; }
+.f3 .tile span { font-size: 13px; font-weight: 400; line-height: 1.3; }
+.f3 .reading b { font: 200 64px/1 Geologica, sans-serif; letter-spacing: -.04em; } .f3 .reading small { font: 400 14px Geologica, sans-serif; }
+.f3 .tile b { font: 700 24px/1.1 Geologica, sans-serif; letter-spacing: -.03em; }
+.f3 .wl .h { font: 700 30px/1.1 Geologica, sans-serif; letter-spacing: -.03em; }
+.f3 .btn { font: 400 17px/1 Geologica, sans-serif; }
+
+/* 4. Legibility-first: Familjen Grotesk + Atkinson Hyperlegible */
+.f4 .time { font: 700 13px/1.2 "Atkinson Hyperlegible", sans-serif; }
+.f4 .h { font: 700 27px/1.1 "Familjen Grotesk", sans-serif; letter-spacing: -.02em; }
+.f4 .b, .f4 .tile span { font: 400 16px/1.55 "Atkinson Hyperlegible", sans-serif; }
+.f4 .tile span { font-size: 13px; line-height: 1.3; }
+.f4 .reading b { font: 500 60px/1 "Familjen Grotesk", sans-serif; letter-spacing: -.03em; } .f4 .reading small { font: 400 14px "Atkinson Hyperlegible", sans-serif; }
+.f4 .tile b { font: 700 24px/1.1 "Familjen Grotesk", sans-serif; }
+.f4 .wl .h { font: 700 30px/1.1 "Familjen Grotesk", sans-serif; letter-spacing: -.02em; }
+.f4 .btn { font: 700 17px/1 "Atkinson Hyperlegible", sans-serif; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BLU by TITAN: font options</h1>
+  <p>The same section from the "A day with BLU" direction, with identical layout and Cerulean colours. Only the type changes. Option 1 is what the site uses now. The home section keeps main's fonts whichever you pick.</p>
+</header>
+<main class="grid">
+  <template id="tpl">
+    <div class="s">
+      <p class="time">7:00, morning ride</p>
+      <h3 class="h">Compete with yourself</h3>
+      <p class="b">A daily glucose score shows how your day went, so you can beat it tomorrow.</p>
+      <p class="reading"><b>102</b><small>mg/dL, steady</small></p>
+    </div>
+    <div class="rule"></div>
+    <div class="tiles">
+      <div class="tile"><b>15 days</b><span>per sensor</span></div>
+      <div class="tile"><b>5 min</b><span>between readings</span></div>
+    </div>
+    <div class="wl">
+      <h2 class="h">Be among the first to try BLU</h2>
+      <p class="b">Join the waitlist and we'll email you when BLU launches.</p>
+      <div class="btn">Join the waitlist</div>
+    </div>
+  </template>
+</main>
+<script>
+const opts = [
+  ['f1', '1. Main (current)', 'Inter headlines, Montserrat uppercase labels, Roboto body. Familiar and neutral.'],
+  ['f2', '2. Extended', 'Unbounded headlines echo the wide, rounded BLU logo. Hanken Grotesk keeps body text calm.'],
+  ['f3', '3. One family', 'Geologica only. Very light reading text and bold headlines give contrast with a single typeface.'],
+  ['f4', '4. Legibility-first', 'Familjen Grotesk headlines, Atkinson Hyperlegible body (designed for low-vision readers).'],
+];
+const grid = document.querySelector('.grid'), tpl = document.getElementById('tpl');
+opts.forEach(([cls, name, why]) => {
+  const s = document.createElement('section'); s.className = 'opt';
+  s.innerHTML = `<h2>${name}</h2><p>${why}</p>`;
+  const card = document.createElement('div'); card.className = 'card ' + cls;
+  card.append(tpl.content.cloneNode(true)); s.append(card); grid.append(s);
+});
+</script>
+</body>
+</html>

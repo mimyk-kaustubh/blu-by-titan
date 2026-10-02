@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLU Home Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #01B0AB;        /* sampled from logo */
+  --teal-deep: #007A76;   /* darker teal so white button text stays readable */
+  --grey: #616363;        /* sampled from TITAN */
+  --bg: #F7F7F7;
+}
+@property --gx { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+@property --gy { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --gw { syntax: '<percentage>'; inherits: false; initial-value: 25%; }
+@property --gh { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E9ECEC; font-family: Inter, sans-serif; color: #1d2222; }
+header.page { max-width: 1680px; margin: 0 auto; padding: 32px 24px 8px; }
+header.page h1 { font: 600 22px/1.2 Inter, sans-serif; }
+header.page p { margin-top: 6px; color: #555; font-size: 14px; max-width: 720px; line-height: 1.45; }
+
+.grid { max-width: 1680px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 32px 24px; }
+.opt h2 { font: 600 15px/1.3 Inter, sans-serif; }
+.opt h2 b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: var(--teal-deep); color: #fff; font-size: 13px; margin-right: 8px; }
+.opt p.note { font-size: 13px; color: #555; line-height: 1.4; margin: 6px 0 14px; min-height: 36px; }
+
+/* phone frame: real 375x812 canvas, scaled down */
+.frame { width: 330px; height: 715px; border-radius: 36px; padding: 0; overflow: hidden; background: #000; box-shadow: 0 0 0 8px #111, 0 18px 40px rgba(0,0,0,.18); margin: 8px; }
+.screen { width: 375px; height: 812px; zoom: .88; position: relative; overflow: hidden; background: #fff; }
+
+/* shared */
+.photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.lockup { display: block; height: auto; }
+.glow-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 118px; background: rgba(255,255,255,.05); font: 500 16px/1.2 Inter, sans-serif; color: #fff; white-space: nowrap; isolation: isolate; text-decoration: none; }
+.glow-btn .glow, .glow-btn .stroke, .glow-btn .fill { position: absolute; border-radius: 72px; z-index: -1; }
+.glow-btn .glow, .glow-btn .stroke { inset: 0; background: radial-gradient(var(--gw) var(--gh) at var(--gx) var(--gy), #fff 0%, rgba(255,255,255,0) 100%); animation: orbit 2.8s linear infinite; }
+.glow-btn .glow { filter: blur(15px); }
+.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
+@keyframes orbit {
+  0%, 100% { --gx: 50%; --gy: 0%; --gw: 25%; --gh: 50%; }
+  25% { --gx: 100%; --gy: 50%; --gh: 35%; }
+  50% { --gx: 50%; --gy: 100%; --gh: 50%; }
+  75% { --gx: 0%; --gy: 50%; --gh: 34%; }
+}
+.soon { display: flex; align-items: center; gap: 11px; font: 300 12px/1.2 Inter, sans-serif; letter-spacing: .04em; }
+.soon i { width: 20px; height: 1px; background: currentColor; }
+.disclaimer { position: absolute; left: 0; right: 0; bottom: 0; height: 16px; display: grid; place-items: center; font: 300 8px/1 Inter, sans-serif; letter-spacing: -.02em; }
+
+/* ---- A. Faithful ---- */
+.a .grey-blur { position: absolute; left: 0; right: 0; bottom: 16px; height: 90px; background: linear-gradient(180deg, rgba(171,171,171,0), rgb(171,171,171)); }
+.a .name { position: absolute; top: 44px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+.a .intro { font: 400 15px/1.2 Montserrat, sans-serif; color: var(--teal-deep); letter-spacing: .08em; }
+.a .lockup { width: 250px; margin-top: 14px; }
+.a .building { position: absolute; top: 494px; right: 45px; width: 208px; color: #fff; font: 300 18px/1.2 Inter, sans-serif; text-align: right; }
+.a .building::before { content: ""; position: absolute; top: 0; right: calc(100% + 10px); width: 66px; height: 1px; background: #fff; }
+.a .crafted { position: absolute; top: 577px; left: 59px; width: 147px; color: #fff; font: 300 20px/1.2 Inter, sans-serif; text-align: right; text-transform: uppercase; }
+.a .crafted-line { position: absolute; top: 577px; right: 11px; width: 26px; height: 1px; background: #fff; }
+.a .cta { position: absolute; top: 728px; left: 36px; right: 36px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
+.a .disclaimer { background: #fff; color: var(--teal-deep); }
+
+/* ---- B. Night ---- */
+.b .photo { filter: brightness(.82) contrast(1.05); }
+.b .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 45%, rgba(4,18,18,.92) 82%, #041212 100%); }
+.b .top { position: absolute; top: 28px; left: 24px; right: 24px; display: flex; justify-content: space-between; color: rgba(255,255,255,.8); font: 400 11px/1 Montserrat, sans-serif; letter-spacing: .14em; }
+.b .bottom { position: absolute; left: 28px; right: 28px; bottom: 44px; color: #fff; }
+.b .lockup { width: 230px; }
+.b .tag { margin-top: 22px; font: 300 22px/1.25 Inter, sans-serif; }
+.b .tag em { font-style: normal; color: var(--teal); }
+.b .row { margin-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+.b .soon { color: rgba(255,255,255,.75); }
+.b .disclaimer { color: rgba(255,255,255,.45); }
+
+/* ---- C. Clean split ---- */
+.c .screen { background: #fff; }
+.c .head { position: absolute; top: 0; left: 0; right: 0; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.c .intro { font: 500 11px/1 Montserrat, sans-serif; letter-spacing: .22em; color: var(--grey); }
+.c .lockup { width: 240px; margin-top: 18px; }
+.c .tag { margin-top: 18px; font: 400 15px/1.35 Inter, sans-serif; color: var(--grey); max-width: 260px; }
+.c .card { position: absolute; top: 300px; left: 14px; right: 14px; bottom: 30px; border-radius: 28px; overflow: hidden; }
+.c .card .photo { object-position: 50% 18%; }
+.c .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.55) 100%); }
+.c .chip { position: absolute; top: 16px; left: 16px; z-index: 1; padding: 7px 12px; border-radius: 99px; background: rgba(255,255,255,.22); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #fff; font: 500 11px/1 Inter, sans-serif; letter-spacing: .06em; }
+.c .card-cta { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1; display: flex; align-items: center; justify-content: space-between; color: #fff; }
+.c .disclaimer { color: var(--grey); }
+
+/* ---- D. Teal statement ---- */
+.screen.d { background: linear-gradient(180deg, #01B0AB 0%, #00807C 100%); }
+.d .lock-wrap { position: absolute; top: 56px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+.d .intro { font: 500 11px/1 Montserrat, sans-serif; letter-spacing: .22em; color: rgba(255,255,255,.85); }
+.d .lockup { width: 270px; margin-top: 18px; }
+.d .duo { position: absolute; top: 250px; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.d .duo .photo { filter: grayscale(1) contrast(1.1); object-position: 50% 10%; }
+.d .duo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: #01B0AB; mix-blend-mode: color; opacity: .55; }
+.d .duo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #01B0AB 0%, rgba(1,176,171,0) 22%, rgba(0,60,58,0) 55%, rgba(0,40,38,.9) 100%); }
+.d .bottom { position: absolute; left: 28px; right: 28px; bottom: 40px; z-index: 2; color: #fff; }
+.d .tag { font: 600 26px/1.15 Montserrat, sans-serif; text-transform: uppercase; letter-spacing: -.01em; }
+.d .row { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; }
+.d .glow-btn .fill { background: radial-gradient(50% 252% at 50% 50%, #ffffff 0%, #E6FAF9 100%); }
+.d .glow-btn { color: var(--teal-deep); }
+.d .disclaimer { z-index: 2; color: rgba(255,255,255,.5); }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="page">
+  <h1>BLU by TITAN: home page options</h1>
+  <p>Four directions for the home screen, shown at phone size (375 × 812). The logo here is cut from your logo image as a stand-in until the Innadam Extended and Beautifully Delicious fonts and the TITAN PNG are in. Teal <code>#01B0AB</code> and grey <code>#616363</code> are sampled from the logo.</p>
+</header>
+
+<main class="grid">
+
+  <!-- A -->
+  <section class="opt">
+    <h2><b>A</b>Faithful swap</h2>
+    <p class="note">Same layout as today. The BLU lockup replaces "niveux" on the light sky, and blue becomes teal.</p>
+    <div class="frame"><div class="screen a">
+      <img class="photo" src="images/00-home-hero-woman-street-sensor.jpg" alt="">
+      <div class="grey-blur"></div>
+      <div class="name"><p class="intro">INTRODUCING</p><img class="lockup" src="brand/lockup-color.png" alt="BLU by TITAN"></div>
+      <h2 class="building">we are building something awesome</h2>
+      <h2 class="crafted">Crafted to enhance your metabolic health</h2>
+      <div class="crafted-line"></div>
+      <div class="cta">
+        <p class="soon"><span>COMING</span><i></i><span>SOON</span></p>
+        <a class="glow-btn" href="#"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
+      </div>
+      <p class="disclaimer">images are for representation. actual product may vary.</p>
+    </div></div>
+  </section>
+
+  <!-- B -->
+  <section class="opt">
+    <h2><b>B</b>Night</h2>
+    <p class="note">Moodier, premium feel. The photo darkens toward the bottom and the white-and-teal lockup sits low with the CTA.</p>
+    <div class="frame"><div class="screen b">
+      <img class="photo" src="images/00-home-hero-woman-street-sensor.jpg" alt="">
+      <div class="shade"></div>
+      <div class="top"><span>INTRODUCING</span><span>EDITION I</span></div>
+      <div class="bottom">
+        <img class="lockup" src="brand/lockup-teal-white.png" alt="BLU by TITAN">
+        <p class="tag">Crafted to enhance your <em>metabolic health.</em></p>
+        <div class="row">
+          <p class="soon"><span>COMING</span><i></i><span>SOON</span></p>
+          <a class="glow-btn" href="#"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
+        </div>
+      </div>
+      <p class="disclaimer">images are for representation. actual product may vary.</p>
+    </div></div>
+  </section>
+
+  <!-- C -->
+  <section class="opt">
+    <h2><b>C</b>Clean split</h2>
+    <p class="note">The logo gets its own white space, so the full-colour lockup reads exactly as designed. The photo sits below as a rounded card.</p>
+    <div class="frame"><div class="screen c">
+      <div class="head">
+        <p class="intro">INTRODUCING</p>
+        <img class="lockup" src="brand/lockup-color.png" alt="BLU by TITAN">
+        <p class="tag">A continuous glucose monitor, crafted to enhance your metabolic health.</p>
+      </div>
+      <div class="card">
+        <img class="photo" src="images/00-home-hero-woman-street-sensor.jpg" alt="">
+        <span class="chip">COMING SOON</span>
+        <div class="card-cta">
+          <span style="font:300 14px/1.3 Inter,sans-serif">we are building<br>something awesome</span>
+          <a class="glow-btn" href="#"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
+        </div>
+      </div>
+      <p class="disclaimer">images are for representation. actual product may vary.</p>
+    </div></div>
+  </section>
+
+  <!-- D -->
+  <section class="opt">
+    <h2><b>D</b>Teal statement</h2>
+    <p class="note">Owns the brand colour. Teal background, all-white lockup and a teal-toned photo, with a white button for contrast.</p>
+    <div class="frame"><div class="screen d">
+      <div class="lock-wrap"><p class="intro">INTRODUCING</p><img class="lockup" src="brand/lockup-white.png" alt="BLU by TITAN"></div>
+      <div class="duo"><img class="photo" src="images/00-home-hero-woman-street-sensor.jpg" alt=""></div>
+      <div class="bottom">
+        <p class="tag">Crafted to enhance your metabolic health</p>
+        <div class="row">
+          <p class="soon"><span>COMING</span><i></i><span>SOON</span></p>
+          <a class="glow-btn" href="#"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join Waitlist</a>
+        </div>
+      </div>
+      <p class="disclaimer">images are for representation. actual product may vary.</p>
+    </div></div>
+  </section>
+
+</main>
+</body>
+</html>
