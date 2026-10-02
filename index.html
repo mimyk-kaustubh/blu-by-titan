@@ -3,16 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NIVEUX</title>
+<title>BLU by TITAN</title>
 <meta name="description" content="Made with love in IISc">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400&family=Inter:wght@300;500;600&family=Montserrat:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&family=Montserrat:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
 /* ---------- Tokens (from the Framer site) ---------- */
 :root {
-  --blue: #0039AC;          /* "Main Blue" token */
-  --blue-2: #4474D4;
+  /* BLU by TITAN brand */
+  --teal: #01B0AB;          /* logo teal (sampled) - accents, dots, glow fill end */
+  --teal-text: #009A95;     /* slightly deeper teal for headings: passes 3:1 for large text */
+  --teal-deep: #007A76;     /* button fills: white text stays readable */
+  --grey: #616363;          /* TITAN grey (sampled) - body copy */
+  --blue: var(--teal-text); /* legacy name used by headings below */
+  --blue-2: var(--teal);
   --bg: #F7F7F7;            /* page background token */
   --white: #FFFFFF;
   --ease: cubic-bezier(.44, 0, .56, 1);          /* Framer default ease */
@@ -41,7 +46,7 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Type presets ---------- */
 .h-display { font: 600 32px/1.2 Inter, sans-serif; color: var(--blue); }
 .h-label   { font: 600 24px/1.2 Montserrat, sans-serif; color: var(--blue); text-transform: uppercase; }
-.body      { font: 400 16px/1.2 Roboto, sans-serif; color: var(--blue); }
+.body      { font: 400 16px/1.2 Roboto, sans-serif; color: var(--grey); }
 
 /* ---------- Glow button ("Join NAV" component) ----------
    Fill = blue radial; Stroke = white radial visible through a 2px gap;
@@ -60,7 +65,7 @@ a { color: inherit; text-decoration: none; }
 }
 .glow-btn .glow { filter: blur(15px); }
 .glow-btn .stroke { --gw: 20.7%; animation-name: orbit-stroke; }
-.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--blue) 0%, var(--blue-2) 100%); }
+.glow-btn .fill { inset: 2px; border-radius: 114px; background: radial-gradient(50% 252% at 50% 50%, var(--teal-deep) 0%, var(--teal) 100%); }
 .glow-btn:hover .glow, .glow-btn:hover .stroke { animation-play-state: paused; transition: --gx .8s linear, --gy .8s linear, --gw .8s linear, --gh .8s linear; }
 .glow-btn:hover .glow   { --gx: 50%; --gy: 50%; --gw: 50%; --gh: 100%; animation: none; }
 .glow-btn:hover .stroke { --gx: 50%; --gy: 50%; --gw: 75%; --gh: 181%; animation: none; }
@@ -81,16 +86,16 @@ a { color: inherit; text-decoration: none; }
 .shine-btn {
   position: relative; display: flex; align-items: center; justify-content: center;
   height: 44px; border-radius: 23px; overflow: hidden;
-  background: radial-gradient(50% 100% at 51.4% 54%, var(--blue) 0%, rgba(0,57,171,.64) 100%);
+  background: radial-gradient(50% 100% at 51.4% 54%, var(--teal-deep) 0%, rgba(0,122,118,.72) 100%);
   font: 500 18px/1.2 Inter, sans-serif; color: #fff; isolation: isolate;
 }
 .shine-btn::before { /* inner highlight */
   content: ""; position: absolute; inset: 0 3px; border-radius: 96px; z-index: -1;
-  background: radial-gradient(95% 598.5% at 53.4% 54.1%, rgb(128,170,255) 0%, rgba(10,92,255,0) 100%);
+  background: radial-gradient(95% 598.5% at 53.4% 54.1%, rgb(64,200,195) 0%, rgba(1,176,171,0) 100%);
 }
 .shine-btn .shine {
   position: absolute; width: 28px; height: 2px;
-  background: linear-gradient(90deg, rgba(181,181,181,0) 0%, rgb(199,218,255) 53%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(90deg, rgba(181,181,181,0) 0%, rgb(190,240,237) 53%, rgba(255,255,255,0) 100%);
 }
 .shine-btn .shine.top    { top: 0;    left: 23px;  animation: shine-r 3.3s var(--ease) infinite; }
 .shine-btn .shine.bottom { bottom: 0; right: 23px; animation: shine-l 3.3s var(--ease) infinite; }
@@ -103,7 +108,7 @@ a { color: inherit; text-decoration: none; }
   position: fixed; top: 0; left: 50%; z-index: 50;
   width: 100%; max-width: var(--col);
   padding: 12px 12px 20px 20px;
-  background: linear-gradient(180deg, rgba(232,240,255,.72) 0%, rgba(171,171,171,0) 85%);
+  background: linear-gradient(180deg, rgba(228,246,245,.72) 0%, rgba(171,171,171,0) 85%);
   transform: translate(-50%, -150px); opacity: 0;
   transition: transform .4s var(--ease), opacity .4s var(--ease);
   pointer-events: none;
@@ -112,22 +117,23 @@ a { color: inherit; text-decoration: none; }
 .nav-pill {
   display: flex; align-items: center; justify-content: space-between;
   height: 68px; padding: 9px 8px 9px 24px; border-radius: 33px;
-  background: rgba(191,210,255,.13);
+  background: rgba(150,215,212,.16);
   backdrop-filter: blur(23px); -webkit-backdrop-filter: blur(23px);
 }
-.logo {
-  width: 40px; height: 40px; border: 4px solid #fff; border-radius: 9px;
-  display: grid; place-items: center;
-  font: 400 42px/.7 Dongle, sans-serif; letter-spacing: -.03em; color: #fff; padding-top: 4px;
-}
+.logo { display: block; height: 26px; }
+.logo img { height: 100%; width: auto; filter: drop-shadow(0 1px 6px rgba(0,60,58,.25)); }
 
 /* ---------- 1. Home (Coming Soon) ---------- */
 .home { position: relative; height: 796px; color: #fff; overflow: hidden; }
 .home > img { position: absolute; inset: 0; width: 100%; height: 804px; object-fit: cover; object-position: 50% 0%; }
 .home .grey-blur { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(153,238,255,0) 0%, rgb(171,171,171) 100%); }
-.home .name { position: absolute; top: 45px; left: 0; right: 0; text-align: center; }
-.home .intro { font: 400 16px/1.2 Montserrat, sans-serif; color: var(--blue); }
-.home .wordmark { font: 300 160px/.7 Dongle, sans-serif; letter-spacing: -.03em; color: var(--blue); margin-top: -26px; }
+.home .name { position: absolute; top: 44px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; }
+.home .intro { font: 400 15px/1.2 Montserrat, sans-serif; letter-spacing: .08em; color: var(--teal-deep); }
+.home .wordmark { margin-top: 14px; }
+.home .wordmark img { width: 250px; height: auto; }
+/* Lockup reveal: wipes in left to right (stand-in for the per-letter flip until the brand fonts are in) */
+.home .wordmark img { clip-path: inset(0 100% 0 0); animation: wipe 1s var(--spring-soft) .1s forwards; }
+@keyframes wipe { to { clip-path: inset(0 0 0 0); } }
 .home .building {
   position: absolute; top: 494px; right: 45px; width: 208px;
   font: 300 18px/1.2 Inter, sans-serif; text-align: right;
@@ -164,7 +170,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
   display: flex; gap: 20px; padding: 12px; background: var(--bg);
 }
-.dots button { border: 0; padding: 0; background: var(--blue); border-radius: 50%; cursor: pointer; transition: opacity .3s var(--ease); }
+.dots button { border: 0; padding: 0; background: var(--teal); border-radius: 50%; cursor: pointer; transition: opacity .3s var(--ease); }
 
 /* 3. Benefits carousel */
 .benefits { padding-bottom: 16px; }
@@ -236,11 +242,12 @@ a { color: inherit; text-decoration: none; }
 .closing .btn-wrap { padding: 38px 34px 53px; }
 
 /* Footer */
-.foot { background: #fff; padding: 28px 16px 32px; text-align: center; font: 300 8px/1.2 Inter, sans-serif; letter-spacing: -.03em; color: var(--blue); }
+.foot { background: #fff; padding: 28px 16px 32px; text-align: center; font: 300 8px/1.2 Inter, sans-serif; letter-spacing: -.03em; color: var(--teal-deep); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .fx .c { opacity: 1; transform: none; }
+  .home .wordmark img { clip-path: none; }
 }
 </style>
 </head>
@@ -249,7 +256,7 @@ a { color: inherit; text-decoration: none; }
 <!-- Sticky nav: drops in, hides on scroll down, returns on scroll up -->
 <nav class="nav" id="nav" aria-label="Main">
   <div class="nav-pill">
-    <a href="#home" class="logo" aria-label="NIVEUX home">n</a>
+    <a href="#home" class="logo" aria-label="BLU by TITAN home"><img src="brand/blu-mark-white.png" alt=""></a>
     <a href="#waitlist" class="glow-btn"><span class="glow"></span><span class="stroke"></span><span class="fill"></span>Join</a>
   </div>
 </nav>
@@ -258,11 +265,11 @@ a { color: inherit; text-decoration: none; }
 
   <!-- 1. HOME (Coming Soon design) -->
   <section class="home" id="home">
-    <img src="images/00-home-hero-woman-street-sensor.jpg" alt="Woman on a city street wearing the NIVEUX sensor on her upper arm" fetchpriority="high">
+    <img src="images/00-home-hero-woman-street-sensor.jpg" alt="Woman on a city street wearing the BLU sensor on her upper arm" fetchpriority="high">
     <div class="grey-blur"></div>
     <div class="name">
       <p class="intro">INTRODUCING</p>
-      <h1 class="wordmark fx" data-start="0">niveux</h1>
+      <h1 class="wordmark"><img src="brand/lockup-color.png" alt="BLU by TITAN"></h1>
     </div>
     <h2 class="building fx" data-start=".8">we are building something awesome</h2>
     <h2 class="crafted fx" data-start=".8">Crafted to enhance your metabolic health</h2>
@@ -290,12 +297,12 @@ a { color: inherit; text-decoration: none; }
       <article class="benefit">
         <img class="photo" src="images/03-feature-photo-woman-reading-in-bed.jpg" alt="Woman reading in bed wearing the sensor" loading="lazy">
         <img class="mock" src="images/08-app-screen-history-graph.png" alt="App screen showing glucose history" loading="lazy">
-        <div class="copy"><h3 class="h-label">You are in<br>control</h3><p class="body">NIVEUX tracks glucose every 5 minutes for 15 days continuously. It detects subtle change in glucose levels, offering early insights and suggests habit changes</p></div>
+        <div class="copy"><h3 class="h-label">You are in<br>control</h3><p class="body">BLU tracks glucose every 5 minutes for 15 days continuously. It detects subtle change in glucose levels, offering early insights and suggests habit changes</p></div>
       </article>
       <article class="benefit">
         <img class="photo" src="images/05-feature-photo-woman-on-bench.jpg" alt="Woman on a bench wearing the sensor" loading="lazy">
         <img class="mock" src="images/06-app-screen-new-log-food.png" alt="App screen logging a meal" loading="lazy">
-        <div class="copy"><h3 class="h-label">Harness the power of AI</h3><p class="body">NIVEUX pushes you forward with reminders for hydration, meals, and exercise, empowering you to stay fueled and ready to take on every challenge</p></div>
+        <div class="copy"><h3 class="h-label">Harness the power of AI</h3><p class="body">BLU pushes you forward with reminders for hydration, meals, and exercise, empowering you to stay fueled and ready to take on every challenge</p></div>
       </article>
     </div>
     <div class="dots"></div>
@@ -317,8 +324,8 @@ a { color: inherit; text-decoration: none; }
   <!-- 5. COLOURWAYS -->
   <section class="colorways" data-v="light">
     <div class="stage">
-      <img class="light" src="images/13-product-sensor-moonlight.png" alt="NIVEUX sensor in Moonlight" loading="lazy">
-      <img class="dark" src="images/13b-product-sensor-dark-night.png" alt="NIVEUX sensor in Dark Night" loading="lazy">
+      <img class="light" src="images/13-product-sensor-moonlight.png" alt="BLU sensor in Moonlight" loading="lazy">
+      <img class="dark" src="images/13b-product-sensor-dark-night.png" alt="BLU sensor in Dark Night" loading="lazy">
     </div>
     <div class="toggle" role="group" aria-label="Colourway">
       <span class="knob"></span>
@@ -331,17 +338,17 @@ a { color: inherit; text-decoration: none; }
   <section class="craft">
     <img class="bg" src="images/14-product-sensor-internals.png" alt="" data-scroll-fx="craft" loading="lazy">
     <h2 class="h-display">The technical craft</h2>
-    <p class="body sub">Engineered for action and built to inspire.<br>See what makes NIVEUX unique</p>
+    <p class="body sub">Engineered for action and built to inspire.<br>See what makes BLU unique</p>
   </section>
 
   <!-- 7. FEATURES CAROUSEL -->
   <section class="carousel features" aria-roledescription="carousel" aria-label="Features">
     <div class="track">
       <article class="feature"><img src="images/15-tech-sweat-proof-sensor-on-arm.jpg" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Sweat-proof performance</h3><p class="body">IP5X water proofing to reach your goals without a pause</p></div></article>
-      <article class="feature"><img src="images/16-tech-long-lasting-man-on-stairs.jpg" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Long-lasting<br>endurance</h3><p class="body">Replace NIVEUX twice a month. Get order reminders on the App when you are low on stock, automatically</p></div></article>
-      <article class="feature"><img src="images/17-tech-comfort-feet-in-hammock.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Engineered for all-day comfort</h3><p class="body">Non-woven polyester patch and a skin friendly adhesive provides makes sure the NIVEUX is comfortable day and night</p></div></article>
-      <article class="feature"><img src="images/18-tech-hygiene-abstract.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Hygiene-first<br>design</h3><p class="body">ETO sterilization ensures a sterile NIVEUX pack decontaminated and delivered every single time</p></div></article>
-      <article class="feature"><img src="images/19-tech-dataglance-phone-watch-widgets.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">dataGlance™ by NIVEUX</h3><p class="body">The NiveuX app comes with useful widgets for mobile devices, so you stay updated, always</p></div></article>
+      <article class="feature"><img src="images/16-tech-long-lasting-man-on-stairs.jpg" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Long-lasting<br>endurance</h3><p class="body">Replace BLU twice a month. Get order reminders on the App when you are low on stock, automatically</p></div></article>
+      <article class="feature"><img src="images/17-tech-comfort-feet-in-hammock.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Engineered for all-day comfort</h3><p class="body">Non-woven polyester patch and a skin friendly adhesive provides makes sure the BLU is comfortable day and night</p></div></article>
+      <article class="feature"><img src="images/18-tech-hygiene-abstract.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">Hygiene-first<br>design</h3><p class="body">ETO sterilization ensures a sterile BLU pack decontaminated and delivered every single time</p></div></article>
+      <article class="feature"><img src="images/19-tech-dataglance-phone-watch-widgets.png" alt="" loading="lazy"><div class="copy"><h3 class="h-label">dataGlance™ by BLU</h3><p class="body">The BLU app comes with useful widgets for mobile devices, so you stay updated, always</p></div></article>
     </div>
     <div class="dots"></div>
   </section>
@@ -350,9 +357,9 @@ a { color: inherit; text-decoration: none; }
   <section class="closing" id="waitlist">
     <div class="head">
       <h2 class="h-label">So far, so good?</h2>
-      <p class="body">Be among the first to try NIVEUX</p>
+      <p class="body">Be among the first to try BLU</p>
     </div>
-    <div class="phone"><img src="images/20-waitlist-app-102-with-sensor.png" alt="NIVEUX app showing 102 mg/dL next to the sensor" data-scroll-fx="phone" loading="lazy"></div>
+    <div class="phone"><img src="images/20-waitlist-app-102-with-sensor.png" alt="BLU app showing 102 mg/dL next to the sensor" data-scroll-fx="phone" loading="lazy"></div>
     <div class="btn-wrap">
       <a href="#" class="shine-btn"><span class="shine top"></span><span class="shine bottom"></span>Join Waitlist</a>
     </div>
