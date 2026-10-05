@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLU Cerulean Tints</title>
+<link rel="icon" type="image/png" href="brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #ECEEF0; color: #1b2023; font-family: "Hanken Grotesk", system-ui, sans-serif; }
+header { max-width: 1800px; margin: 0 auto; padding: 28px 24px 0; }
+h1 { font-size: 22px; font-weight: 600; }
+header p { margin-top: 6px; max-width: 860px; color: #4c5357; font-size: 14px; line-height: 1.5; }
+.jump { position: sticky; top: 0; z-index: 5; margin-top: 16px; padding: 12px 24px; background: rgba(236,238,240,.92); backdrop-filter: blur(8px); }
+.jump .in { max-width: 1800px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.jump span { font-size: 13px; color: #4c5357; margin-right: 4px; }
+.jump button { height: 34px; padding: 0 14px; border-radius: 999px; border: 1px solid #c9ced2; background: #fff; font: 500 13px/1 "Hanken Grotesk", sans-serif; cursor: pointer; }
+.jump button:hover { border-color: #8a9399; }
+.jump button:focus-visible { outline: 2px solid #0369A1; outline-offset: 2px; }
+.grid { max-width: 1800px; margin: 0 auto; padding: 16px 24px 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 20px; }
+.opt h2 { font-size: 16px; font-weight: 600; }
+.opt h2 em { font-style: normal; font-size: 11px; font-weight: 600; color: #0369A1; background: #E0F2FE; padding: 2px 8px; border-radius: 99px; margin-left: 6px; vertical-align: 2px; }
+.opt .why { margin-top: 4px; font-size: 13px; line-height: 1.4; color: #4c5357; min-height: 54px; }
+.sw { display: flex; gap: 6px; margin: 10px 0 12px; }
+.sw div { flex: 1; }
+.sw i { display: block; height: 28px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  background-image: linear-gradient(45deg, #ddd 25%, transparent 25%, transparent 75%, #ddd 75%), linear-gradient(45deg, #ddd 25%, #fff 25%, #fff 75%, #ddd 75%);
+  background-size: 8px 8px; background-position: 0 0, 4px 4px; position: relative; overflow: hidden; }
+.sw i::after { content: ""; position: absolute; inset: 0; background: var(--c); }
+.sw b { display: block; margin-top: 4px; font: 500 10.5px/1.2 "Hanken Grotesk", sans-serif; color: #4c5357; }
+.frame { width: 300px; height: 608px; border-radius: 32px; overflow: hidden; background: #000; box-shadow: 0 0 0 7px #121417, 0 16px 36px rgba(0,0,0,.18); margin: 7px; }
+.frame iframe { width: 375px; height: 760px; border: 0; zoom: .8; display: block; background: #F2F7FA; }
+.aa { margin-top: 12px; font-size: 12px; color: #4c5357; line-height: 1.5; }
+.aa em { font-style: normal; font-weight: 600; }
+.aa .ok { color: #116329; } .aa .warn { color: #9a6700; } .aa .bad { color: #B42318; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cerulean: white hue and transparency</h1>
+  <p>The redesign in seven treatments of Cerulean. Each phone is the real page with only colour tokens changed. Contrast is shown for headings on the page background and white text on the waitlist button: <span style="color:#116329;font-weight:600">4.5:1 or more passes</span> for normal text, <span style="color:#9a6700;font-weight:600">3 to 4.5</span> only passes for large text. Each version also reaches the home section: the BLU logo is tinted to match (by TITAN stays grey), and the surface versions tint the fade at the bottom of the hero photo.</p>
+</header>
+<nav class="jump" aria-label="Jump all phones to a section"><div class="in">
+  <span>Jump all to:</span>
+  <button data-sel=".home">Home</button>
+  <button data-sel=".day">A day with BLU</button>
+  <button data-sel=".statement">Statement</button>
+  <button data-sel=".sensor">The sensor</button>
+  <button data-sel=".features">Features</button>
+  <button data-sel=".waitlist">Waitlist</button>
+</div></nav>
+<main class="grid" id="grid"></main>
+
+<script>
+const mixT = (hex, a) => `color-mix(in srgb, ${hex} ${a}%, transparent)`;
+const V = [
+  { name: 'Cerulean (current)', why: 'Solid Cerulean everywhere. The baseline.',
+    t: {}, aa: [5.54, 5.93] },
+  { name: 'White 15%', why: 'Every Cerulean colour mixed with 15% white. Softer, still close to the original. Text sits just under the 4.5 line.',
+    logo: 'w15', t: { '--teal': '#32B2EC', '--teal-text': '#2980AF', '--teal-deep': '#2980AF', '--teal-mid': '#2896CF', '--ink': '#1E3444' }, aa: [4.05, 4.37] },
+  { name: 'White 30%', why: 'Every Cerulean colour mixed with 30% white. A pastel, airy look, but headings and button text become hard to read.',
+    logo: 'w30', t: { '--teal': '#56C0F0', '--teal-text': '#4F96BD', '--teal-deep': '#4F96BD', '--teal-mid': '#4EA9D8', '--ink': '#344857' }, aa: [3.03, 3.27] },
+  { name: 'Sky wash', why: 'White hue goes into the surfaces instead: page, cards and range band pick up a faint sky tint. Text and buttons stay solid.',
+    t: { '--mist': '#ECF8FD', '--card': '#F8FCFE', '--range': '#CFEDFB' },
+    css: `.home .grey-blur { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, color-mix(in srgb, #0EA5E9 35%, #ABABAB) 100%) !important; }`,
+    aa: [5.48, 5.93] },
+  { name: 'Translucent 80%', why: 'Cerulean at 80% opacity, so the background shows through. Lighter overall, similar to White 15%.',
+    logo: 'a80', t: { '--teal': mixT('#0EA5E9', 80), '--teal-text': mixT('#0369A1', 80), '--teal-deep': mixT('#0369A1', 80), '--teal-mid': mixT('#0284C7', 80) }, aa: [3.78, 3.98] },
+  { name: 'Glass', why: 'Buttons, nav and the dark band become translucent Cerulean with a blur. Text colours stay solid.',
+    logo: 'a80', t: { '--ink': mixT('#082032', 88) },
+    css: `.shine-btn { background: radial-gradient(50% 100% at 51.4% 54%, ${mixT('#0369A1', 78)} 0%, ${mixT('#0284C7', 62)} 100%) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); }
+          .glow-btn .fill { background: radial-gradient(50% 252% at 50% 50%, ${mixT('#0369A1', 78)} 0%, ${mixT('#0EA5E9', 62)} 100%) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+          .nav-pill { background: ${mixT('#0EA5E9', 22)} !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+          .home .grey-blur { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, color-mix(in srgb, #0EA5E9 25%, #ABABAB) 100%) !important; }`,
+    aa: [5.54, 3.82] },
+  { name: 'Hybrid', rec: true, why: 'Recommended. White 30% on accents only (glucose line, dots, range band), Sky wash surfaces and a glass nav. Headings and buttons stay solid, so contrast holds.',
+    logo: 'w15', t: { '--teal': '#56C0F0', '--mist': '#ECF8FD', '--card': '#F8FCFE', '--range': '#D7F0FC' },
+    css: `.nav-pill { background: ${mixT('#0EA5E9', 22)} !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+          .home .grey-blur { background: linear-gradient(180deg, rgba(255,255,255,0) 0%, color-mix(in srgb, #56C0F0 40%, #ABABAB) 100%) !important; }`,
+    aa: [5.48, 5.93] },
+];
+const grade = r => r >= 4.5 ? 'ok' : r >= 3 ? 'warn' : 'bad';
+const base = { '--teal': '#0EA5E9', '--teal-text': '#0369A1', '--teal-deep': '#0369A1', '--ink': '#082032', '--mist': '#F2F7FA' };
+const grid = document.getElementById('grid'), frames = [];
+V.forEach(v => {
+  const logoCol = { w15: '#2896CF', w30: '#4EA9D8', a80: mixT('#0284C7', 80) }[v.logo] || '#0284C7';
+  const tok = { ...base, ...v.t, '--logo': logoCol };
+  const sec = document.createElement('section'); sec.className = 'opt';
+  sec.innerHTML = `
+    <h2>${v.name}${v.rec ? '<em>Recommended</em>' : ''}</h2>
+    <p class="why">${v.why}</p>
+    <div class="sw">${[['Logo', '--logo'], ['Accent', '--teal'], ['Headings', '--teal-text'], ['Button', '--teal-deep'], ['Dark band', '--ink'], ['Page', '--mist']]
+      .map(([l, k]) => `<div><i style="--c:${tok[k]}"></i><b>${l}</b></div>`).join('')}</div>
+    <div class="frame"><iframe title="${v.name} preview" src="index.html"></iframe></div>
+    <p class="aa">Headings <em class="${grade(v.aa[0])}">${v.aa[0].toFixed(2)}:1</em> &nbsp; Button text <em class="${grade(v.aa[1])}">${v.aa[1].toFixed(2)}:1</em></p>`;
+  grid.append(sec);
+  const f = sec.querySelector('iframe'); frames.push(f);
+  f.addEventListener('load', () => {
+    const d = f.contentDocument, st = d.createElement('style');
+    st.textContent = `:root{${Object.entries(v.t).map(([k, c]) => `${k}:${c};`).join('')}} ${v.css || ''}`;
+    d.head.append(st);
+    if (v.logo) d.querySelectorAll('img[src$="lockup-cerulean.png"]').forEach(i => i.src = `brand/palettes/lockup-cerulean-${v.logo}.png`);
+  });
+});
+document.querySelectorAll('.jump button').forEach(b => b.addEventListener('click', () => {
+  frames.forEach(f => {
+    const el = f.contentDocument && f.contentDocument.querySelector(b.dataset.sel);
+    // Instant jump: smooth scrolling inside off-screen iframes is throttled and stops part-way.
+    if (el) f.contentWindow.scrollTo({ top: el.getBoundingClientRect().top + f.contentWindow.scrollY, behavior: 'instant' });
+  });
+}));
+</script>
+</body>
+</html>
